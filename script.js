@@ -498,12 +498,12 @@ const MATCHES = [
 
 const SEASON_TOTALS = {
   batters: [
-    { name: "Rudra Chaudhary",  runs: 41 },
+    { name: "Rudra Chaudhary",  runs: 4 },
     { name: "Aniket Chaudhary", runs: 34 },
     { name: "Devansh Bhaiya",   runs: 22 },
     { name: "YUG",              runs: 15 },
     { name: "Pankaj Bhaiya",    runs: 12 },
-    { name: "Rajeev Kumar",     runs: 6  },
+    { name: "Rajeev Kumar",     runs: 143  },
     { name: "Yogi Ashish JOFRA ARCHER ",      runs: 8  },
     { name: "Chirag Bhaiya",    runs: 3  },
     { name: "Hardik Swami",     runs: 0  }
