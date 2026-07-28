@@ -823,6 +823,29 @@ td{
 }
 td:last-child, th:last-child{ text-align: right; }
 
+/* wide tables (scorecard, MOM points) get their own horizontal scroll
+   on narrow screens instead of squashing/wrapping columns into each other */
+.table-scroll{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-scroll table{
+  min-width: 640px;
+}
+@media (max-width: 700px){
+  .table-scroll{
+    margin: 0 -28px;
+    padding: 0 28px;
+  }
+  .table-scroll th, .table-scroll td{
+    white-space: nowrap;
+    padding-right: 18px;
+  }
+  .table-scroll th:last-child, .table-scroll td:last-child{
+    padding-right: 0;
+  }
+}
+
 /* ============ FIXTURES ============ */
 .fixtures{
   background: linear-gradient(180deg, transparent, rgba(32,31,27,0.6), transparent);
@@ -1049,6 +1072,12 @@ td:last-child, th:last-child{ text-align: right; }
   font-size: 0.85rem;
 }
 .footer-links a:hover{ color: var(--mustard-bright); }
+.footer-credit-name{
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--concrete);
+}
 .footer-credit{
   text-align: center;
   margin-top: 32px;
