@@ -11,8 +11,8 @@ const PLAYERS = [
   { number: "03", name: "Rudra Chaudhary", role: "Batsman" },
   { number: "04", name: "YUG", role: "All-rounder" },
   { number: "05", name: "Devansh Bhaiya", role: "Batsman" },
-  { number: "06", name: "Chirag Bhaiya", role: "Bowler" },
-  { number: "07", name: "Pankaj Bhaiya", role: "Wicketkeeper" },
+  { number: "06", name: "Chirag Bhaiya", role: "Batsman " },
+  { number: "07", name: "Pankaj Bhaiya", role: "All- rounder " },
   { number: "08", name: "Rajeev Kumar", role: "All-rounder" },
   { number: "09", name: "Hardik Swami", role: "All-rounder" },
 ];
