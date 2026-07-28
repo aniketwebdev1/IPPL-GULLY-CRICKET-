@@ -120,19 +120,23 @@
 
     <div class="stat-panel reveal scorecard-panel">
       <h3>Scorecard</h3>
-      <table>
-        <thead><tr><th>Player</th><th>Runs (Balls)</th><th>SR</th><th>Wkts/Ov</th><th>Runs Given</th><th>Econ</th><th>Fielding</th></tr></thead>
-        <tbody id="scorecardBody"></tbody>
-      </table>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Player</th><th>Runs (Balls)</th><th>SR</th><th>Wkts/Ov</th><th>Runs Given</th><th>Econ</th><th>Fielding</th></tr></thead>
+          <tbody id="scorecardBody"></tbody>
+        </table>
+      </div>
     </div>
 
     <h3 class="reports-heading reveal">Individual Score (MOM Formula)</h3>
     <p class="edit-note reveal">✏️ Formula: (Runs×2) + (Wickets×4) + Batting Bonus (SR≥100) + Bowling Bonus (Economy tiers) + Fielding Bonus (Catch/Run-out ×2 har ek).</p>
     <div class="stat-panel reveal scorecard-panel">
-      <table>
-        <thead><tr><th>Player</th><th>Base</th><th>Bat Bonus</th><th>Bowl Bonus</th><th>Fielding</th><th>Total</th></tr></thead>
-        <tbody id="pointsBody"></tbody>
-      </table>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Player</th><th>Base</th><th>Bat Bonus</th><th>Bowl Bonus</th><th>Fielding</th><th>Total</th></tr></thead>
+          <tbody id="pointsBody"></tbody>
+        </table>
+      </div>
     </div>
 
     <div class="mom-banner reveal" id="momBadge"></div>
