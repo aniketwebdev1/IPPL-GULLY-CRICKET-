@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPPL — Evening Gully Cricket League</title>
+<meta name="description" content="IPPL — our gully cricket crew's home ground online. Squad, fixtures, stats and toss.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="#top" class="brand">IPPL<span class="brand-dot">.</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#squad">Squad</a>
+      <a href="#matchcenter">Match Center</a>
+      <a href="#fixtures">Fixtures</a>
+      <a href="#toss">Toss</a>
+      <a href="#rules">Gully Rules</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <svg class="chalk-wicket" viewBox="0 0 420 320" aria-hidden="true">
+    <path d="M110 300 C107 220, 104 140, 108 70" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+    <path d="M205 302 C201 218, 209 138, 204 64" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+    <path d="M300 300 C296 218, 303 140, 298 70" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+    <path d="M100 78 C140 66, 172 84, 206 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+    <path d="M198 72 C236 60, 266 82, 302 68" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="365" cy="40" r="12" fill="currentColor" opacity="0.9"/>
+    <path d="M240 96 C280 78, 322 60, 356 44" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round" opacity="0.7"/>
+  </svg>
+  <div class="six-stamp" aria-hidden="true">
+    <svg viewBox="0 0 140 140">
+      <circle cx="70" cy="70" r="58" fill="none" stroke="currentColor" stroke-width="4"/>
+      <circle cx="70" cy="70" r="49" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+    </svg>
+    <span>SIX!</span>
+  </div>
+  <div class="hero-inner">
+    <p class="eyebrow">EST. 2026 · EVENING GULLY CRICKET</p>
+    <h1 class="hero-title"><span class="hero-title-shine">IPPL</span><span class="hero-fullform">(I-Pocket Premier League)</span></h1>
+    <p class="hero-sub">9 dost. 1 tapeball. Har shaam, gully mein.<br class="br-desktop"> Score kam ho ya zyada — bahaanay hamesha zyada honge.</p>
+    <div class="hero-actions">
+      <a href="#toss" class="btn btn-amber">Karo Toss</a>
+      <a href="#squad" class="btn btn-ghost">Squad Dekho</a>
+    </div>
+  </div>
+  <a href="#about" class="scroll-cue" aria-label="Scroll down">
+    <span></span>
+  </a>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>CHAUKA! &nbsp;•&nbsp; ONE TIP ONE HAND OUT &nbsp;•&nbsp; SIXER ON THE ROOF = OUT &nbsp;•&nbsp; TAPE BALL SWING HAI BHAI &nbsp;•&nbsp; RETIRED HURT AT 25 &nbsp;•&nbsp; GULLY BOUNCER ALERT &nbsp;•&nbsp; CHAUKA! &nbsp;•&nbsp; ONE TIP ONE HAND OUT &nbsp;•&nbsp; SIXER ON THE ROOF = OUT &nbsp;•&nbsp; TAPE BALL SWING HAI BHAI &nbsp;•&nbsp; RETIRED HURT AT 25 &nbsp;•&nbsp; GULLY BOUNCER ALERT &nbsp;•&nbsp;</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / SCOREBOARD ============ -->
+<section class="about" id="about">
+  <div class="section-inner about-grid">
+    <div class="about-copy reveal">
+      <p class="section-label">01 — About the crew</p>
+      <h2>Yeh koi stadium nahi, gully hai.</h2>
+      <p>IPPL humaari apni evening cricket league hai — 9-10 log, ek tapeball, aur ek stretch of road jo har match ke baad thoda aur pitch jaisa lagne lagta hai. Koi selector nahi, koi contract nahi — bas time pe pahunch jao, aur bhai log ko out karo.</p>
+      <p class="edit-note">✏️ Edit this paragraph in <code>index.html</code> — apni team ki kahani, ground ka naam, aur founding year daal do.</p>
+    </div>
+    <div class="scoreboard reveal">
+      <div class="score-tile">
+        <span class="score-num" data-count="10">0</span>
+        <span class="score-label">Players</span>
+      </div>
+      <div class="score-tile">
+        <span class="score-num" data-count="0">0</span>
+        <span class="score-label">Matches Played</span>
+      </div>
+      <div class="score-tile">
+        <span class="score-num" data-count="1">0</span>
+        <span class="score-label">Home Ground</span>
+      </div>
+      <div class="score-tile">
+        <span class="score-num" data-count="2026">0</span>
+        <span class="score-label">Est. Year</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SQUAD ============ -->
+<section class="squad" id="squad">
+  <div class="section-inner">
+    <p class="section-label">02 — The squad</p>
+    <h2 class="reveal">10 players, 10 jerseys, ek WhatsApp group.</h2>
+    <p class="edit-note reveal">✏️ Har card ka naam, role aur jersey number apni team ke hisaab se badal do (<code>index.html</code> mein <code>.player-card</code> dhundo).</p>
+    <div class="squad-grid" id="squadGrid"></div>
+  </div>
+</section>
+
+<!-- ============ MATCH CENTER ============ -->
+<section class="matchcenter" id="matchcenter">
+  <div class="section-inner">
+    <p class="section-label">03 — Match Center</p>
+    <h2 class="reveal">Aaj kaisa khela sab?</h2>
+    <p class="edit-note reveal">✏️ Har match ke baad <code>matches-data.js</code> mein ek naya match object add karo (runs, balls, wickets, overs, runs given har player ke) — scorecard, Man of the Match, aur reports yeh khud calculate karta hai.</p>
+
+    <div class="match-picker reveal">
+      <label for="matchSelect">Match select karo:</label>
+      <select id="matchSelect"></select>
+    </div>
+
+    <div class="stat-panel reveal scorecard-panel">
+      <h3>Scorecard</h3>
+      <table>
+        <thead><tr><th>Player</th><th>Runs (Balls)</th><th>SR</th><th>Wkts/Ov</th><th>Runs Given</th><th>Econ</th><th>Fielding</th></tr></thead>
+        <tbody id="scorecardBody"></tbody>
+      </table>
+    </div>
+
+    <h3 class="reports-heading reveal">Individual Score (MOM Formula)</h3>
+    <p class="edit-note reveal">✏️ Formula: (Runs×2) + (Wickets×4) + Batting Bonus (SR≥100) + Bowling Bonus (Economy tiers) + Fielding Bonus (Catch/Run-out ×2 har ek).</p>
+    <div class="stat-panel reveal scorecard-panel">
+      <table>
+        <thead><tr><th>Player</th><th>Base</th><th>Bat Bonus</th><th>Bowl Bonus</th><th>Fielding</th><th>Total</th></tr></thead>
+        <tbody id="pointsBody"></tbody>
+      </table>
+    </div>
+
+    <div class="mom-banner reveal" id="momBadge"></div>
+
+    <h3 class="reports-heading reveal">Season Totals</h3>
+    <p class="edit-note reveal">✏️ Yeh season ki running total hai — <code>matches-data.js</code> ke <code>SEASON_TOTALS</code> object mein daily/har match ke baad runs aur wickets edit karo. Orange Cap aur Purple Cap khud calculate ho jaayenge.</p>
+    <div class="stats-grid">
+      <div class="stat-panel reveal">
+        <h3>Total Runs — Batters</h3>
+        <table>
+          <thead><tr><th>Player</th><th>Runs</th></tr></thead>
+          <tbody id="seasonBattingBody"></tbody>
+        </table>
+      </div>
+      <div class="stat-panel reveal">
+        <h3>Total Wickets — Bowlers</h3>
+        <table>
+          <thead><tr><th>Player</th><th>Wkts</th></tr></thead>
+          <tbody id="seasonBowlingBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cap-banner reveal" id="capWinnersBanner"></div>
+
+    <h3 class="reports-heading reveal">Player Reports</h3>
+    <ul class="reports-grid" id="reportsList"></ul>
+  </div>
+</section>
+
+<!-- ============ FIXTURES ============ -->
+<section class="fixtures" id="fixtures">
+  <div class="section-inner fixtures-grid">
+    <div class="reveal">
+      <p class="section-label">04 — Match nights</p>
+      <h2>Aaj match hai — kab shuru?</h2>
+      <p class="live-clock" id="liveClock">Loading…</p>
+      <div class="countdown" id="countdown">
+        <div class="cd-box"><span id="cdDays">--</span><label>Days</label></div>
+        <div class="cd-box"><span id="cdHours">--</span><label>Hrs</label></div>
+        <div class="cd-box"><span id="cdMins">--</span><label>Min</label></div>
+        <div class="cd-box"><span id="cdSecs">--</span><label>Sec</label></div>
+      </div>
+      <p class="countdown-caption" id="countdownCaption">Loading…</p>
+      <p class="edit-note">✏️ Match time <code>script.js</code> ke top mein <code>MATCH_START</code>/<code>MATCH_END</code> mein set hai (abhi 7:40 PM – 9:30 PM, roz).</p>
+    </div>
+    <div class="reveal">
+      <p class="schedule-heading">Weekly Schedule</p>
+      <ul class="fixture-list" id="fixtureList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOSS SIMULATOR ============ -->
+<section class="toss" id="toss">
+  <div class="section-inner toss-inner">
+    <p class="section-label">05 — Toss time</p>
+    <h2 class="reveal">Sikka uchalo, faisla karo.</h2>
+    <p class="reveal">Har match se pehle wahi purana jhagda — bat karna hai ya bowl. Ab decide karega sikka.</p>
+
+    <div class="coin-stage reveal">
+      <div class="coin" id="coin">
+        <div class="coin-face coin-heads">H</div>
+        <div class="coin-face coin-tails">T</div>
+      </div>
+    </div>
+
+    <button class="btn btn-amber" id="tossBtn">Karo Toss</button>
+    <p class="toss-result" id="tossResult">&nbsp;</p>
+  </div>
+</section>
+
+<!-- ============ RULES ============ -->
+<section class="rules" id="rules">
+  <div class="section-inner">
+    <p class="section-label">06 — Gully rules</p>
+    <h2 class="reveal">Kyunki gully cricket ka apna constitution hota hai.</h2>
+    <div class="rules-grid">
+      <div class="rule-card reveal">
+        <span class="rule-tag">Rule 01</span>
+        <p>Blue ghar mein ball jaaye — out.</p>
+      </div>
+      <div class="rule-card reveal">
+        <span class="rule-tag">Rule 02</span>
+        <p>Baaki gharon mein ball jaaye — 2 run.</p>
+      </div>
+      <div class="rule-card reveal">
+        <span class="rule-tag">Rule 03</span>
+        <p>Ball naali mein gayi — 2 run.</p>
+      </div>
+      <div class="rule-card reveal">
+        <span class="rule-tag">Rule 04</span>
+        <p>Bhaiya ke ramp se ball cross ho jaaye — boundary.</p>
+      </div>
+    </div>
+    <p class="edit-note reveal">✏️ Yeh humaari asli house-rules hain — koi naya rule add/edit karna ho toh <code>index.html</code> mein <code>.rule-card</code> dhundo.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="section-inner footer-grid">
+    <div>
+      <p class="brand footer-brand">IPPL<span class="brand-dot">.</span></p>
+      <p>Evening gully cricket, since 2026.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://chat.whatsapp.com/Jui4usYF5fk5azBTB56OIB?s=sh&p=a&ilr=0" target="_blank" rel="noopener">WhatsApp Group ↗</a>
+    </div>
+  </div>
+  <p class="footer-credit">Built by the IPPL squad. Edit everything, break nothing.</p>
+</footer>
+
+<script src="matches-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
