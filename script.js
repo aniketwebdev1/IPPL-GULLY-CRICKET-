@@ -503,7 +503,7 @@ const SEASON_TOTALS = {
     { name: "Devansh Bhaiya",   runs: 22 },
     { name: "YUG",              runs: 15 },
     { name: "Pankaj Bhaiya",    runs: 12 },
-    { name: "Rajeev Kumar",     runs: 143  },
+    { name: "Rajeev Kumar",     runs: 143 },
     { name: "Yogi Ashish JOFRA ARCHER ",      runs: 8  },
     { name: "Chirag Bhaiya",    runs: 3  },
     { name: "Hardik Swami",     runs: 0  }
