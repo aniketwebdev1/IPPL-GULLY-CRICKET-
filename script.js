@@ -7,7 +7,7 @@
 // ---------- 1. SQUAD DATA (edit this) ----------
 const PLAYERS = [
   { number: "01", name: "Aniket Chaudhary", role: "All-rounder" },
-  { number: "02", name: "Yogi Ashish",  role: "All rounder" },
+  { number: "02", name: "Yogi Ashish", nickname: "BOFRA ARCHER", role: "Fast Bowler" },
   { number: "03", name: "Rudra Chaudhary", role: "Batsman" },
   { number: "04", name: "YUG", role: "All-rounder" },
   { number: "05", name: "Devansh Bhaiya", role: "Batsman" },
@@ -258,6 +258,51 @@ function playerReport(p){
   return lines.join(" ");
 }
 
+// Winner banner — reads match.scores (team totals) and shows which team
+// won, with a confetti/glow celebration. If scores are tied, shows a
+// neutral "match tied" state instead.
+function renderWinnerBanner(match){
+  const banner = document.getElementById("winnerBanner");
+  if (!banner) return;
+
+  if (!match.scores){
+    banner.innerHTML = "";
+    banner.className = "winner-banner reveal in-view";
+    return;
+  }
+
+  const entries = Object.entries(match.scores);
+  const sorted = [...entries].sort((a, b) => b[1] - a[1]);
+  const scoreLine = entries.map(([name, runs]) => `${name} ${runs}`).join("&nbsp;&nbsp;vs&nbsp;&nbsp;");
+  const isTie = sorted.length > 1 && sorted[0][1] === sorted[1][1];
+
+  if (isTie){
+    banner.className = "winner-banner reveal in-view";
+    banner.innerHTML = `
+      <div class="winner-content">
+        <span class="mom-tag">🤝 Match Tied</span>
+        <span class="winner-score">${scoreLine}</span>
+      </div>
+    `;
+    return;
+  }
+
+  const winnerName = sorted[0][0];
+  banner.className = "winner-banner reveal in-view winner-celebrate";
+  banner.innerHTML = `
+    <span class="confetti-piece">🎉</span>
+    <span class="confetti-piece">🎊</span>
+    <span class="confetti-piece">🏏</span>
+    <span class="confetti-piece">🎉</span>
+    <span class="confetti-piece">🎊</span>
+    <div class="winner-content">
+      <span class="mom-tag">🏆 Match Winner</span>
+      <span class="winner-name">${winnerName}</span>
+      <span class="winner-score">${scoreLine}</span>
+    </div>
+  `;
+}
+
 function renderMatchCenter(){
   const select = document.getElementById("matchSelect");
   const scorecardBody = document.getElementById("scorecardBody");
@@ -273,6 +318,7 @@ function renderMatchCenter(){
   function draw(matchId){
     const match = MATCHES.find(m => m.id === matchId) || MATCHES[0];
     const mom = findManOfTheMatch(match);
+    renderWinnerBanner(match);
 
     scorecardBody.innerHTML = match.players.map(p => `
       <tr>
@@ -455,96 +501,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initScoreCount();
 });
-/* ============================================
-   IPPL — matches-data.js
-   ⚡ YEH FILE HAR MATCH KE BAAD EDIT KARO ⚡
-
-   Har match khatam hone ke baad, ek naya object
-   MATCHES array mein sabse UPAR (start mein) add karo.
-   Player ka naam EXACTLY wahi likho jo script.js ke
-   PLAYERS array mein hai (spelling match honi chahiye).
-
-   Agar koi player us match mein bowling nahi kar raha
-   tha, toh wickets/overs/runsGiven ko 0 hi rehne do.
-   Agar batting nahi ki, runs/balls 0 rehne do.
-   Catch nahi liya ya run-out nahi kiya toh catches/
-   runOuts ko 0 hi rehne do.
-
-   ⚠️ Kam se kam pichhle 3 din ke matches yahan hamesha
-   maujood rehne chahiye — purane matches delete mat karo,
-   sirf naye upar add karte jao. Isse Match Center mein
-   history dekhi ja sakti hai aur Orange/Purple Cap sahi
-   season data se calculate hote hain.
-   ============================================ */
-
-const MATCHES = [
-  // ---- Sample match — apna asli data isi format mein daalo ----
-  {
-    id: "m1",
-    date: "2026-07-20",
-    label: "Yogi Blasters vs Rudra Challengers",
-    ground: "Home Gully Ground",
-    players: [
-      // name must match PLAYERS[].name in script.js exactly
-      { name: "Aniket Chaudhary", runs: 34, balls: 22, wickets: 1, overs: 3, runsGiven: 18, catches: 1, runOuts: 0 },
-      { name: "Yogi Ashish",      runs: 8,  balls: 10, wickets: 3, overs: 4, runsGiven: 14, catches: 0, runOuts: 0 },
-      { name: "Rudra Chaudhary",  runs: 41, balls: 30, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 1 },
-      { name: "YUG",        runs: 15, balls: 12, wickets: 1, overs: 2, runsGiven: 11, catches: 0, runOuts: 0 },
-      { name: "Devansh Bhaiya",   runs: 22, balls: 19, wickets: 0, overs: 0, runsGiven: 0,  catches: 1, runOuts: 0 },
-      { name: "Chirag Bhaiya",    runs: 3,  balls: 5,  wickets: 2, overs: 3, runsGiven: 9,  catches: 0, runOuts: 0 },
-      { name: "Pankaj Bhaiya",    runs: 12, balls: 9,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Rajeev Kumar",     runs: 6,  balls: 7,  wickets: 1, overs: 2, runsGiven: 13, catches: 0, runOuts: 0 }
-    ]
-  }
-
-  // ---- Naya match yahan ADD karo (upar wale se pehle, comma laga ke) ----
-  // {
-  //   id: "m2",
-  //   date: "2026-08-03",
-  //   label: "Yogi Blasters vs Rudra Challengers",
-  //   ground: "Home Gully Ground",
-  //   players: [
-  //     { name: "Aniket Chaudhary", runs: 0, balls: 0, wickets: 0, overs: 0, runsGiven: 0, catches: 0, runOuts: 0 },
-  //     ...
-  //   ]
-  // },
-];
-
-/* ============================================
-   SEASON_TOTALS
-   ⚡ YEH BHI DAILY / HAR MATCH KE BAAD EDIT KARO ⚡
-
-   Yeh season ki running total hai — har player ke
-   season bhar ke total runs (batters mein) aur total
-   wickets (bowlers mein). Har match ke baad bas number
-   ko current total mein add karke yahan update kar do.
-
-   Orange Cap (sabse zyada runs) aur Purple Cap (sabse
-   zyada wickets) yahi data se automatically nikalte hain
-   — jo naam sabse upar aa jaaye, wahi winner ban jaata hai.
-   ============================================ */
-
-const SEASON_TOTALS = {
-  batters: [
-    { name: "Rudra Chaudhary",  runs: 41 },
-    { name: "Aniket Chaudhary", runs: 34 },
-    { name: "Devansh Bhaiya",   runs: 22 },
-    { name: "YUG",              runs: 15 },
-    { name: "Pankaj Bhaiya",    runs: 12 },
-    { name: "Rajeev Kumar",     runs: 6  },
-    { name: "Yogi Ashish",      runs: 8  },
-    { name: "Chirag Bhaiya",    runs: 3  },
-    { name: "Hardik Swami",     runs: 0  }
-  ],
-  bowlers: [
-    { name: "Yogi Ashish",      wickets: 3 },
-    { name: "Chirag Bhaiya",    wickets: 2 },
-    { name: "Aniket Chaudhary", wickets: 1 },
-    { name: "YUG",              wickets: 1 },
-    { name: "Rajeev Kumar",     wickets: 1 },
-    { name: "Rudra Chaudhary",  wickets: 0 },
-    { name: "Devansh Bhaiya",   wickets: 0 },
-    { name: "Pankaj Bhaiya",    wickets: 0 },
-    { name: "Hardik Swami",     wickets: 0 }
-  ]
-};
