@@ -7,7 +7,7 @@
 // ---------- 1. SQUAD DATA (edit this) ----------
 const PLAYERS = [
   { number: "01", name: "Aniket Chaudhary", role: "All-rounder" },
-  { number: "02", name: "Yogi Ashish", nickname: "BOFRA ARCHER", role: "Fast Bowler" },
+  { number: "02", name: "Yogi Ashish",  role: "All rounder" },
   { number: "03", name: "Rudra Chaudhary", role: "Batsman" },
   { number: "04", name: "YUG", role: "All-rounder" },
   { number: "05", name: "Devansh Bhaiya", role: "Batsman" },
