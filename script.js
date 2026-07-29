@@ -7,15 +7,46 @@
 // ---------- 1. SQUAD DATA (edit this) ----------
 const PLAYERS = [
   { number: "01", name: "Aniket Chaudhary", role: "All-rounder" },
-  { number: "02", name: "Yogi Ashish", role: "Fast Bowler" },
+  { number: "02", name: "Yogi Ashish", nickname: "BOFRA ARCHER", role: "Fast Bowler" },
   { number: "03", name: "Rudra Chaudhary", role: "Batsman" },
   { number: "04", name: "YUG", role: "All-rounder" },
   { number: "05", name: "Devansh Bhaiya", role: "Batsman" },
-  { number: "06", name: "Chirag Bhaiya", role: "Batsman " },
-  { number: "07", name: "Pankaj Bhaiya", role: "All- rounder " },
+  { number: "06", name: "Chirag Bhaiya", role: "Bowler" },
+  { number: "07", name: "Pankaj Bhaiya", role: "Wicketkeeper" },
   { number: "08", name: "Rajeev Kumar", role: "All-rounder" },
   { number: "09", name: "Hardik Swami", role: "All-rounder" },
 ];
+
+// ---------- 1b. TEAMS (edit this) ----------
+// Two teams for the season — captain listed separately, plus a
+// members array (captain included) so it can render as one lineup.
+const TEAMS = [
+  {
+    name: "Yogi Blasters",
+    captain: "Yogi Ashish",
+    members: ["Yogi Ashish", "Aniket Chaudhary", "YUG", "Rajeev Kumar"]
+  },
+  {
+    name: "Rudra Challengers",
+    captain: "Rudra Chaudhary",
+    members: ["Rudra Chaudhary", "Devansh Bhaiya", "Chirag Bhaiya", "Pankaj Bhaiya", "Hardik Swami"]
+  }
+];
+
+function renderTeams(){
+  const grid = document.getElementById("teamsGrid");
+  if (!grid) return;
+  grid.innerHTML = TEAMS.map(team => `
+    <div class="stat-panel team-card">
+      <h3>${team.name}</h3>
+      <ul class="team-members">
+        ${team.members.map(name => `
+          <li>${name}${name === team.captain ? ' <span class="captain-tag">C</span>' : ""}</li>
+        `).join("")}
+      </ul>
+    </div>
+  `).join("");
+}
 
 function initials(name){
   return name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
@@ -251,7 +282,7 @@ function renderMatchCenter(){
         <td>${p.wickets}/${p.overs}ov</td>
         <td>${p.overs ? p.runsGiven : "—"}</td>
         <td>${p.overs ? economy(p.runsGiven, p.overs).toFixed(1) : "—"}</td>
-        <td>${p.catches || 0} Catch / ${p.runOuts || 0} Run Out</td>
+        <td>${p.catches || 0}c / ${p.runOuts || 0}ro</td>
       </tr>
     `).join("");
 
@@ -285,6 +316,7 @@ function renderMatchCenter(){
   draw(MATCHES[0].id);
   select.addEventListener("change", () => draw(select.value));
 }
+
 
 // Season totals — read directly from SEASON_TOTALS (edited daily/after each
 // match), ranked, with Orange Cap / Purple Cap winners shown below.
@@ -338,19 +370,14 @@ function initToss(){
     resultEl.textContent = "Sikka hawa mein…";
 
     const isHeads = Math.random() < 0.5;
-
-    // Which face is visible is controlled purely by opacity (see CSS),
-    // so set it right away — the spin below is just a decorative full
-    // rotation that starts and ends facing the viewer.
-    coin.classList.remove("result-heads", "result-tails");
-    coin.classList.add(isHeads ? "result-heads" : "result-tails");
-
-    const extraSpins = 5; // full rotations, always a multiple of 360
-    coin.style.setProperty("--spin-to", `${extraSpins * 360}deg`);
+    const extraSpins = 5; // full rotations before landing
+    const landingDeg = extraSpins * 360 + (isHeads ? 0 : 180);
+    coin.style.setProperty("--spin-to", `${landingDeg}deg`);
     coin.classList.remove("spinning");
     // force reflow so the animation restarts
     void coin.offsetWidth;
     coin.classList.add("spinning");
+    coin.style.transform = `rotateY(${landingDeg}deg)`;
 
     setTimeout(() => {
       const winner = captains[Math.floor(Math.random() * captains.length)];
@@ -417,6 +444,7 @@ function initScoreCount(){
 // ---------- INIT ----------
 document.addEventListener("DOMContentLoaded", () => {
   renderSquad();
+  renderTeams();
   renderSeasonTotals();
   renderMatchCenter();
   renderWeeklySchedule();
@@ -454,18 +482,18 @@ const MATCHES = [
   {
     id: "m1",
     date: "2026-07-20",
-    label: "Squad A vs Squad B",
+    label: "Yogi Blasters vs Rudra Challengers",
     ground: "Home Gully Ground",
     players: [
       // name must match PLAYERS[].name in script.js exactly
       { name: "Aniket Chaudhary", runs: 34, balls: 22, wickets: 1, overs: 3, runsGiven: 18, catches: 1, runOuts: 0 },
       { name: "Yogi Ashish",      runs: 8,  balls: 10, wickets: 3, overs: 4, runsGiven: 14, catches: 0, runOuts: 0 },
-      { name: "Rudra Chaudhary",  runs: 0, balls: 14, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 41, balls: 30, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 1 },
       { name: "YUG",        runs: 15, balls: 12, wickets: 1, overs: 2, runsGiven: 11, catches: 0, runOuts: 0 },
       { name: "Devansh Bhaiya",   runs: 22, balls: 19, wickets: 0, overs: 0, runsGiven: 0,  catches: 1, runOuts: 0 },
       { name: "Chirag Bhaiya",    runs: 3,  balls: 5,  wickets: 2, overs: 3, runsGiven: 9,  catches: 0, runOuts: 0 },
       { name: "Pankaj Bhaiya",    runs: 12, balls: 9,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Rajeev Kumar",     runs: 12,  balls: 7,  wickets: 2, overs: 2, runsGiven: 13, catches: 0, runOuts: 0 }
+      { name: "Rajeev Kumar",     runs: 6,  balls: 7,  wickets: 1, overs: 2, runsGiven: 13, catches: 0, runOuts: 0 }
     ]
   }
 
@@ -473,7 +501,7 @@ const MATCHES = [
   // {
   //   id: "m2",
   //   date: "2026-08-03",
-  //   label: "Squad A vs Squad B",
+  //   label: "Yogi Blasters vs Rudra Challengers",
   //   ground: "Home Gully Ground",
   //   players: [
   //     { name: "Aniket Chaudhary", runs: 0, balls: 0, wickets: 0, overs: 0, runsGiven: 0, catches: 0, runOuts: 0 },
@@ -498,18 +526,18 @@ const MATCHES = [
 
 const SEASON_TOTALS = {
   batters: [
-    { name: "Rudra Chaudhary",  runs: 4 },
+    { name: "Rudra Chaudhary",  runs: 41 },
     { name: "Aniket Chaudhary", runs: 34 },
     { name: "Devansh Bhaiya",   runs: 22 },
     { name: "YUG",              runs: 15 },
     { name: "Pankaj Bhaiya",    runs: 12 },
-    { name: "Rajeev Kumar",     runs: 25 },
-    { name: "Yogi Ashish ",      runs: 8  },
-    { name: "Chirag Bhaiya",    runs: 44  },
+    { name: "Rajeev Kumar",     runs: 6  },
+    { name: "Yogi Ashish",      runs: 8  },
+    { name: "Chirag Bhaiya",    runs: 3  },
     { name: "Hardik Swami",     runs: 0  }
   ],
   bowlers: [
-    { name: "Yogi Ashish ",      wickets: 3 },
+    { name: "Yogi Ashish",      wickets: 3 },
     { name: "Chirag Bhaiya",    wickets: 2 },
     { name: "Aniket Chaudhary", wickets: 1 },
     { name: "YUG",              wickets: 1 },
