@@ -465,7 +465,7 @@ const MATCHES = [
       { name: "Devansh Bhaiya",   runs: 22, balls: 19, wickets: 0, overs: 0, runsGiven: 0,  catches: 1, runOuts: 0 },
       { name: "Chirag Bhaiya",    runs: 3,  balls: 5,  wickets: 2, overs: 3, runsGiven: 9,  catches: 0, runOuts: 0 },
       { name: "Pankaj Bhaiya",    runs: 12, balls: 9,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Rajeev Kumar",     runs: 120,  balls: 7,  wickets: 2, overs: 2, runsGiven: 13, catches: 0, runOuts: 0 }
+      { name: "Rajeev Kumar",     runs: 12,  balls: 7,  wickets: 2, overs: 2, runsGiven: 13, catches: 0, runOuts: 0 }
     ]
   }
 
@@ -503,9 +503,9 @@ const SEASON_TOTALS = {
     { name: "Devansh Bhaiya",   runs: 22 },
     { name: "YUG",              runs: 15 },
     { name: "Pankaj Bhaiya",    runs: 12 },
-    { name: "Rajeev Kumar",     runs: 143 },
+    { name: "Rajeev Kumar",     runs: 25 },
     { name: "Yogi Ashish JOFRA ARCHER ",      runs: 8  },
-    { name: "Chirag Bhaiya",    runs: 3  },
+    { name: "Chirag Bhaiya",    runs: 44  },
     { name: "Hardik Swami",     runs: 0  }
   ],
   bowlers: [
