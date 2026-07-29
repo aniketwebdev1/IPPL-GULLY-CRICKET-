@@ -7,7 +7,7 @@
 // ---------- 1. SQUAD DATA (edit this) ----------
 const PLAYERS = [
   { number: "01", name: "Aniket Chaudhary", role: "All-rounder" },
-  { number: "02", name: "Yogi Ashish JOFRA ARCHER ", nickname: "BOFRA ARCHER", role: "Fast Bowler" },
+  { number: "02", name: "Yogi Ashish", role: "Fast Bowler" },
   { number: "03", name: "Rudra Chaudhary", role: "Batsman" },
   { number: "04", name: "YUG", role: "All-rounder" },
   { number: "05", name: "Devansh Bhaiya", role: "Batsman" },
@@ -459,7 +459,7 @@ const MATCHES = [
     players: [
       // name must match PLAYERS[].name in script.js exactly
       { name: "Aniket Chaudhary", runs: 34, balls: 22, wickets: 1, overs: 3, runsGiven: 18, catches: 1, runOuts: 0 },
-      { name: "Yogi Ashish ( JOFRA ARCHER )",      runs: 8,  balls: 10, wickets: 3, overs: 4, runsGiven: 14, catches: 0, runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 8,  balls: 10, wickets: 3, overs: 4, runsGiven: 14, catches: 0, runOuts: 0 },
       { name: "Rudra Chaudhary",  runs: 0, balls: 14, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
       { name: "YUG",        runs: 15, balls: 12, wickets: 1, overs: 2, runsGiven: 11, catches: 0, runOuts: 0 },
       { name: "Devansh Bhaiya",   runs: 22, balls: 19, wickets: 0, overs: 0, runsGiven: 0,  catches: 1, runOuts: 0 },
@@ -504,12 +504,12 @@ const SEASON_TOTALS = {
     { name: "YUG",              runs: 15 },
     { name: "Pankaj Bhaiya",    runs: 12 },
     { name: "Rajeev Kumar",     runs: 25 },
-    { name: "Yogi Ashish JOFRA ARCHER ",      runs: 8  },
+    { name: "Yogi Ashish ",      runs: 8  },
     { name: "Chirag Bhaiya",    runs: 44  },
     { name: "Hardik Swami",     runs: 0  }
   ],
   bowlers: [
-    { name: "Yogi Ashish JOFRA ARCHER ",      wickets: 3 },
+    { name: "Yogi Ashish ",      wickets: 3 },
     { name: "Chirag Bhaiya",    wickets: 2 },
     { name: "Aniket Chaudhary", wickets: 1 },
     { name: "YUG",              wickets: 1 },
