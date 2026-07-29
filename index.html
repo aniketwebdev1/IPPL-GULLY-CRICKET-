@@ -49,7 +49,7 @@
   </div>
   <div class="hero-inner">
     <p class="eyebrow">EST. 2026 · EVENING GULLY CRICKET</p>
-    <h1 class="hero-title"><span class="hero-title-shine">IPPL</span><span class="hero-fullform">(I-Pocket Premier League)</span></h1>
+    <h1 class="hero-title">IPPL</h1>
     <p class="hero-sub">9 dost. 1 tapeball. Har shaam, gully mein.<br class="br-desktop"> Score kam ho ya zyada — bahaanay hamesha zyada honge.</p>
     <div class="hero-actions">
       <a href="#toss" class="btn btn-amber">Karo Toss</a>
@@ -113,6 +113,9 @@
     <h2 class="reveal">Aaj kaisa khela sab?</h2>
     <p class="edit-note reveal">✏️ Har match ke baad <code>matches-data.js</code> mein ek naya match object add karo (runs, balls, wickets, overs, runs given har player ke) — scorecard, Man of the Match, aur reports yeh khud calculate karta hai.</p>
 
+    <h3 class="reports-heading reveal">Yogi Blasters vs Rudra Challengers</h3>
+    <div class="teams-grid reveal" id="teamsGrid"></div>
+
     <div class="match-picker reveal">
       <label for="matchSelect">Match select karo:</label>
       <select id="matchSelect"></select>
@@ -120,23 +123,19 @@
 
     <div class="stat-panel reveal scorecard-panel">
       <h3>Scorecard</h3>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Player</th><th>Runs (Balls)</th><th>SR</th><th>Wkts/Ov</th><th>Runs Given</th><th>Econ</th><th>Fielding</th></tr></thead>
-          <tbody id="scorecardBody"></tbody>
-        </table>
-      </div>
+      <table>
+        <thead><tr><th>Player</th><th>Runs (Balls)</th><th>SR</th><th>Wkts/Ov</th><th>Runs Given</th><th>Econ</th><th>Fielding</th></tr></thead>
+        <tbody id="scorecardBody"></tbody>
+      </table>
     </div>
 
     <h3 class="reports-heading reveal">Individual Score (MOM Formula)</h3>
     <p class="edit-note reveal">✏️ Formula: (Runs×2) + (Wickets×4) + Batting Bonus (SR≥100) + Bowling Bonus (Economy tiers) + Fielding Bonus (Catch/Run-out ×2 har ek).</p>
     <div class="stat-panel reveal scorecard-panel">
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Player</th><th>Base</th><th>Bat Bonus</th><th>Bowl Bonus</th><th>Fielding</th><th>Total</th></tr></thead>
-          <tbody id="pointsBody"></tbody>
-        </table>
-      </div>
+      <table>
+        <thead><tr><th>Player</th><th>Base</th><th>Bat Bonus</th><th>Bowl Bonus</th><th>Fielding</th><th>Total</th></tr></thead>
+        <tbody id="pointsBody"></tbody>
+      </table>
     </div>
 
     <div class="mom-banner reveal" id="momBadge"></div>
@@ -245,7 +244,6 @@
     </div>
     <div class="footer-links">
       <a href="https://chat.whatsapp.com/Jui4usYF5fk5azBTB56OIB?s=sh&p=a&ilr=0" target="_blank" rel="noopener">WhatsApp Group ↗</a>
-      <p class="footer-credit-name">Made by ANIKET CHAUDHARY — Member of IPPL</p>
     </div>
   </div>
   <p class="footer-credit">Built by the IPPL squad. Edit everything, break nothing.</p>
