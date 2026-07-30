@@ -700,9 +700,9 @@ const MATCHES = [
     },
     players: [
       // name must match PLAYERS[].name in script.js exactly
-      { name: "Aniket Chaudhary", runs: 23, balls: 20, wickets: 1, overs: 7, runsGiven: 7, catches: , runOuts: 0 },
+      { name: "Aniket Chaudhary", runs: 23, balls: 20, wickets: 1, overs: 7, runsGiven: 7, catches: 0, runOuts: 0 },
       { name: "Yogi Ashish",      runs: 26,  balls: 18, wickets: 0, overs: 4, runsGiven: 20, catches: 0, runOuts: 0 },
-      { name: "Rudra Chaudhary",  runs: 5, balls: 34, wickets: 0, overs: 4, runsGiven: 30,  catches: 0, runOuts:  },
+      { name: "Rudra Chaudhary",  runs: 5, balls: 34, wickets: 0, overs: 4, runsGiven: 30,  catches: 0, runOuts: 0 },
       { name: "YUG",        runs: 28, balls: 18, wickets: 0, overs: 3, runsGiven: 20, catches: 0, runOuts: 0 },
       { name: "Devansh Bhaiya",   runs: 6, balls: 11, wickets: 1, overs: 2, runsGiven: 11,  catches: 1, runOuts: 0 },
       { name: "Chirag Bhaiya",    runs: 6,  balls: 9,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
