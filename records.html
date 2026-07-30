@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Records — IPPL</title>
+<meta name="description" content="IPPL — every past match, date-wise. Click a date to open its full scorecard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">IPPL<span class="brand-dot">.</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#squad">Squad</a>
+      <a href="records.html" class="nav-current">Past Records</a>
+      <a href="index.html#matchcenter">Match Center</a>
+      <a href="index.html#fixtures">Fixtures</a>
+      <a href="index.html#toss">Toss</a>
+      <a href="index.html#rules">Gully Rules</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ RECORDS ============ -->
+<section class="records-page">
+  <div class="section-inner">
+    <p class="section-label">Archive</p>
+    <h2 class="reveal in-view">Past Records</h2>
+    <p class="edit-note reveal in-view">✏️ Yeh list <code>matches-data.js</code> se seedha aata hai — jab bhi wahan naya match add karoge, yahan date-wise apne aap show ho jaayega. Kisi bhi date pe click karo, uska poora scorecard khul jaayega.</p>
+
+    <ul class="records-list" id="recordsList"></ul>
+    <p class="records-empty" id="recordsEmpty" style="display:none;">Abhi tak koi match record nahi hai — <code>matches-data.js</code> mein match add karo.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="section-inner footer-grid">
+    <div>
+      <p class="brand footer-brand">IPPL<span class="brand-dot">.</span></p>
+      <p>Evening gully cricket, since 2026.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">← Back to Home</a>
+      <a href="https://chat.whatsapp.com/Jui4usYF5fk5azBTB56OIB?s=sh&p=a&ilr=0" target="_blank" rel="noopener">WhatsApp Group ↗</a>
+    </div>
+  </div>
+  <p class="footer-credit">Built by the IPPL squad. Edit everything, break nothing.</p>
+</footer>
+
+<script src="matches-data.js"></script>
+<script src="stats-shared.js"></script>
+<script src="records.js"></script>
+<script>
+  // reuse the homepage's nav toggle behaviour for the mobile menu
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("navToggle");
+    const links = document.getElementById("navLinks");
+    if (!toggle || !links) return;
+    toggle.addEventListener("click", () => {
+      const open = links.classList.toggle("open");
+      toggle.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      links.classList.remove("open");
+      toggle.classList.remove("open");
+    }));
+  });
+</script>
+</body>
+</html>
