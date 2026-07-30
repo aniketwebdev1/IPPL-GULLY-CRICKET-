@@ -268,26 +268,37 @@ function renderWinnerBanner(match){
   if (!match.scores){
     banner.innerHTML = "";
     banner.className = "winner-banner reveal in-view";
+    delete banner.dataset.winner;
+    delete banner.dataset.scoreline;
     return;
   }
 
   const entries = Object.entries(match.scores);
   const sorted = [...entries].sort((a, b) => b[1] - a[1]);
-  const scoreLine = entries.map(([name, runs]) => `${name} ${runs}`).join("&nbsp;&nbsp;vs&nbsp;&nbsp;");
   const isTie = sorted.length > 1 && sorted[0][1] === sorted[1][1];
 
   if (isTie){
     banner.className = "winner-banner reveal in-view";
+    delete banner.dataset.winner;
+    delete banner.dataset.scoreline;
     banner.innerHTML = `
       <div class="winner-content">
-        <span class="mom-tag">🤝 Match Tied</span>
-        <span class="winner-score">${scoreLine}</span>
+        <div class="winner-scoreline">
+          ${entries.map(([name, runs]) => `<span class="wts"><span class="wts-name">${name}</span> made <span class="wts-runs">${runs}</span></span>`).join('<span class="winner-vs">vs</span>')}
+        </div>
+        <div class="winner-result">
+          <span class="mom-tag">🤝 Match Tied</span>
+          <span class="winner-congrats">Koi haara nahi, koi jeeta nahi!</span>
+        </div>
       </div>
     `;
     return;
   }
 
   const winnerName = sorted[0][0];
+  const scoreLine = entries.map(([name, runs]) => `${name} ${runs}`).join("  vs  ");
+  banner.dataset.winner = winnerName;
+  banner.dataset.scoreline = scoreLine;
   banner.className = "winner-banner reveal in-view winner-celebrate";
   banner.innerHTML = `
     <span class="confetti-piece">🎉</span>
@@ -296,11 +307,155 @@ function renderWinnerBanner(match){
     <span class="confetti-piece">🎉</span>
     <span class="confetti-piece">🎊</span>
     <div class="winner-content">
-      <span class="mom-tag">🏆 Match Winner</span>
-      <span class="winner-name">${winnerName}</span>
-      <span class="winner-score">${scoreLine}</span>
+      <div class="winner-scoreline">
+        ${entries.map(([name, runs]) => `<span class="wts"><span class="wts-name">${name}</span> made <span class="wts-runs">${runs}</span></span>`).join('<span class="winner-vs">vs</span>')}
+      </div>
+      <div class="winner-result">
+        <span class="mom-tag">🏆 Match Winner</span>
+        <span class="winner-name">${winnerName}</span>
+        <span class="winner-congrats">Zabardast jeet! 🎉</span>
+      </div>
     </div>
   `;
+}
+
+/* ============================================
+   FULLSCREEN WIN CELEBRATION
+   Triggers when the winner banner scrolls into view:
+   full-screen confetti popper burst + a short synthesized
+   victory fanfare (no audio file needed).
+   ============================================ */
+
+// Audio is locked by browsers until a real user gesture. We grab/resume
+// a shared AudioContext on the first tap/click anywhere on the page so
+// it's ready by the time someone scrolls to the winner banner.
+let sharedAudioCtx = null;
+function getAudioCtx(){
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  if (!sharedAudioCtx) sharedAudioCtx = new Ctx();
+  if (sharedAudioCtx.state === "suspended") sharedAudioCtx.resume();
+  return sharedAudioCtx;
+}
+["click", "touchstart", "keydown"].forEach(evt =>
+  document.addEventListener(evt, () => getAudioCtx(), { once: true, passive: true })
+);
+
+function playVictorySound(){
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+
+  // ascending "ta-da" arpeggio
+  const notes = [523.25, 659.25, 783.99, 1046.5]; // C5 E5 G5 C6
+  notes.forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "triangle";
+    osc.frequency.value = freq;
+    const start = now + i * 0.11;
+    gain.gain.setValueAtTime(0, start);
+    gain.gain.linearRampToValueAtTime(0.22, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.5);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + 0.55);
+  });
+
+  // soft crowd-cheer style noise swell underneath
+  const dur = 0.9;
+  const bufferSize = Math.floor(ctx.sampleRate * dur);
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++){
+    const envelope = Math.sin((Math.PI * i) / bufferSize);
+    data[i] = (Math.random() * 2 - 1) * envelope * 0.5;
+  }
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+  const noiseGain = ctx.createGain();
+  noiseGain.gain.setValueAtTime(0.15, now);
+  noise.connect(noiseGain);
+  noiseGain.connect(ctx.destination);
+  noise.start(now);
+}
+
+const WF_COLORS = ["#F5C567", "#E3A83B", "#EC5FA6", "#8B6BD1", "#6BAFA1", "#F4EFE3"];
+
+function spawnFullscreenCelebration(winnerName, scoreLine){
+  const overlay = document.getElementById("winnerFullscreen");
+  const confettiWrap = document.getElementById("wfConfetti");
+  const titleEl = document.getElementById("wfTitle");
+  const subEl = document.getElementById("wfSub");
+  if (!overlay || !confettiWrap) return;
+
+  titleEl.textContent = `${winnerName} WINS!`;
+  subEl.textContent = scoreLine;
+
+  confettiWrap.innerHTML = "";
+  const pieceTotal = window.matchMedia("(max-width: 640px)").matches ? 42 : 72;
+
+  for (let i = 0; i < pieceTotal; i++){
+    const fromLeft = i % 2 === 0;
+    const roll = Math.random();
+    const shapeClass = roll > 0.75 ? "wf-p-star" : roll > 0.5 ? "wf-p-dot" : roll > 0.3 ? "wf-p-ribbon" : "wf-p-rect";
+
+    const el = document.createElement("span");
+    el.className = `wf-piece ${shapeClass} ${fromLeft ? "from-left" : "from-right"}`;
+
+    const spread = 25 + Math.random() * 85; // vw, outward from the corner
+    const rise = 55 + Math.random() * 80;   // vh, upward
+    const tx = fromLeft ? spread : -spread;
+    const ty = -rise;
+    const rot = (Math.random() * 900 - 450).toFixed(0);
+    const dur = (1.5 + Math.random() * 1.3).toFixed(2);
+    const delay = (Math.random() * 0.4).toFixed(2);
+    const color = WF_COLORS[Math.floor(Math.random() * WF_COLORS.length)];
+
+    el.style.setProperty("--tx", tx + "vw");
+    el.style.setProperty("--ty", ty + "vh");
+    el.style.setProperty("--rot", rot + "deg");
+    el.style.setProperty("--dur", dur + "s");
+    el.style.setProperty("--delay", delay + "s");
+    if (shapeClass === "wf-p-star"){
+      el.style.color = color;
+    } else {
+      el.style.background = color;
+    }
+    confettiWrap.appendChild(el);
+  }
+
+  overlay.classList.add("show");
+  playVictorySound();
+
+  clearTimeout(spawnFullscreenCelebration._t);
+  spawnFullscreenCelebration._t = setTimeout(() => {
+    overlay.classList.remove("show");
+  }, 3000);
+}
+
+// Fires the fullscreen celebration each time the winner banner scrolls
+// into view (and resets so scrolling away + back triggers it again).
+function initWinnerCelebration(){
+  const banner = document.getElementById("winnerBanner");
+  if (!banner || !("IntersectionObserver" in window)) return;
+
+  let armed = true;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.55){
+        if (armed && banner.classList.contains("winner-celebrate")){
+          spawnFullscreenCelebration(banner.dataset.winner || "", banner.dataset.scoreline || "");
+          armed = false;
+        }
+      } else if (!entry.isIntersecting){
+        armed = true;
+      }
+    });
+  }, { threshold: [0, 0.55] });
+
+  observer.observe(banner);
 }
 
 function renderMatchCenter(){
@@ -493,6 +648,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTeams();
   renderSeasonTotals();
   renderMatchCenter();
+  initWinnerCelebration();
   renderWeeklySchedule();
   startLiveClock();
   startCountdown();
