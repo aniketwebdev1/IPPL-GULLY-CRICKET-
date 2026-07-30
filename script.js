@@ -7,7 +7,7 @@
 // ---------- 1. SQUAD DATA (edit this) ----------
 const PLAYERS = [
   { number: "01", name: "Aniket Chaudhary", role: "All-rounder" },
-  { number: "02", name: "Yogi Ashish", nickname: "BOFRA ARCHER", role: "Fast Bowler" },
+  { number: "02", name: "Yogi Ashish", role: "All- rounder" },
   { number: "03", name: "Rudra Chaudhary", role: "Batsman" },
   { number: "04", name: "YUG", role: "All-rounder" },
   { number: "05", name: "Devansh Bhaiya", role: "Batsman" },
@@ -700,14 +700,14 @@ const MATCHES = [
     },
     players: [
       // name must match PLAYERS[].name in script.js exactly
-      { name: "Aniket Chaudhary", runs: 34, balls: 22, wickets: 1, overs: 3, runsGiven: 18, catches: 1, runOuts: 0 },
-      { name: "Yogi Ashish",      runs: 8,  balls: 10, wickets: 3, overs: 4, runsGiven: 14, catches: 0, runOuts: 0 },
-      { name: "Rudra Chaudhary",  runs: 41, balls: 30, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 1 },
-      { name: "YUG",        runs: 15, balls: 12, wickets: 1, overs: 2, runsGiven: 11, catches: 0, runOuts: 0 },
-      { name: "Devansh Bhaiya",   runs: 22, balls: 19, wickets: 0, overs: 0, runsGiven: 0,  catches: 1, runOuts: 0 },
-      { name: "Chirag Bhaiya",    runs: 3,  balls: 5,  wickets: 2, overs: 3, runsGiven: 9,  catches: 0, runOuts: 0 },
-      { name: "Pankaj Bhaiya",    runs: 12, balls: 9,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Rajeev Kumar",     runs: 6,  balls: 7,  wickets: 1, overs: 2, runsGiven: 13, catches: 0, runOuts: 0 }
+      { name: "Aniket Chaudhary", runs: 23, balls: 20, wickets: 1, overs: 7, runsGiven: 7, catches: , runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 26,  balls: 18, wickets: 0, overs: 4, runsGiven: 20, catches: 0, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 5, balls: 34, wickets: 0, overs: 4, runsGiven: 30,  catches: 0, runOuts:  },
+      { name: "YUG",        runs: 28, balls: 18, wickets: 0, overs: 3, runsGiven: 20, catches: 0, runOuts: 0 },
+      { name: "Devansh Bhaiya",   runs: 6, balls: 11, wickets: 1, overs: 2, runsGiven: 11,  catches: 1, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 6,  balls: 9,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Pankaj Bhaiya",    runs: 52, balls: 42,  wickets: 0, overs: 4, runsGiven: 33,  catches: 0, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 1,  balls: 2,  wickets: 1, overs: 2, runsGiven: 19, catches: 0, runOuts: 0 }
     ]
   }
 
@@ -741,24 +741,24 @@ const MATCHES = [
 
 const SEASON_TOTALS = {
   batters: [
-    { name: "Rudra Chaudhary",  runs: 41 },
-    { name: "Aniket Chaudhary", runs: 34 },
-    { name: "Devansh Bhaiya",   runs: 22 },
-    { name: "YUG",              runs: 15 },
-    { name: "Pankaj Bhaiya",    runs: 12 },
-    { name: "Rajeev Kumar",     runs: 6  },
-    { name: "Yogi Ashish",      runs: 8  },
-    { name: "Chirag Bhaiya",    runs: 3  },
+    { name: "Rudra Chaudhary",  runs: 5 },
+    { name: "Aniket Chaudhary", runs: 23 },
+    { name: "Devansh Bhaiya",   runs: 6 },
+    { name: "YUG",              runs: 28 },
+    { name: "Pankaj Bhaiya",    runs: 52 },
+    { name: "Rajeev Kumar",     runs: 1 },
+    { name: "Yogi Ashish",      runs: 26  },
+    { name: "Chirag Bhaiya",    runs: 6 },
     { name: "Hardik Swami",     runs: 0  }
   ],
   bowlers: [
-    { name: "Yogi Ashish",      wickets: 3 },
-    { name: "Chirag Bhaiya",    wickets: 2 },
+    { name: "Yogi Ashish",      wickets: 0 },
+    { name: "Chirag Bhaiya",    wickets: 0 },
     { name: "Aniket Chaudhary", wickets: 1 },
-    { name: "YUG",              wickets: 1 },
+    { name: "YUG",              wickets: 0 },
     { name: "Rajeev Kumar",     wickets: 1 },
     { name: "Rudra Chaudhary",  wickets: 0 },
-    { name: "Devansh Bhaiya",   wickets: 0 },
+    { name: "Devansh Bhaiya",   wickets: 1 },
     { name: "Pankaj Bhaiya",    wickets: 0 },
     { name: "Hardik Swami",     wickets: 0 }
   ]
