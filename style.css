@@ -722,29 +722,51 @@ p{ color: var(--chalk-dim); max-width: 60ch; }
   background: var(--wall-2);
   border: 1px solid rgba(138,90,63,0.3);
   border-radius: 10px;
-  padding: 18px 22px;
+  padding: 20px 24px;
   margin-bottom: 28px;
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 .winner-banner:empty{ display: none; }
 .winner-content{
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
   position: relative;
   z-index: 1;
 }
+.winner-scoreline{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--concrete);
+}
+.wts-name{ color: var(--chalk-dim); }
+.wts-runs{
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--mustard-bright);
+  margin-left: 4px;
+}
+.winner-vs{ opacity: 0.45; font-style: italic; }
+.winner-result{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
 .winner-name{
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: var(--chalk);
 }
-.winner-score{
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--concrete);
+.winner-congrats{
+  font-family: var(--font-chalk);
+  font-size: 1.4rem;
+  color: var(--teal-bright);
   margin-left: auto;
 }
 
@@ -777,10 +799,144 @@ p{ color: var(--chalk-dim); max-width: 60ch; }
   12%{ opacity: 1; }
   100%{ transform: translateY(110px) rotate(360deg); opacity: 0; }
 }
+
+/* ============================================
+   FULLSCREEN WIN CELEBRATION
+   Two party-poppers fire confetti/streamers/stars from the bottom
+   corners across the whole viewport, over a dark twinkling backdrop.
+   ============================================ */
+.winner-fullscreen{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(76,41,122,0.4), rgba(10,8,14,0.93) 68%);
+  transition: opacity 0.35s ease;
+}
+.winner-fullscreen.show{ opacity: 1; }
+
+.wf-inner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.wf-inner::before{
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, rgba(245,239,230,0.9) 0, transparent 60%),
+    radial-gradient(2px 2px at 80% 15%, rgba(227,168,59,0.9) 0, transparent 60%),
+    radial-gradient(2px 2px at 30% 70%, rgba(245,239,230,0.7) 0, transparent 60%),
+    radial-gradient(2px 2px at 65% 82%, rgba(107,175,161,0.8) 0, transparent 60%),
+    radial-gradient(2px 2px at 90% 60%, rgba(227,168,59,0.7) 0, transparent 60%),
+    radial-gradient(2px 2px at 45% 30%, rgba(245,239,230,0.6) 0, transparent 60%),
+    radial-gradient(2px 2px at 15% 55%, rgba(236,95,166,0.6) 0, transparent 60%);
+  animation: wf-twinkle 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes wf-twinkle{
+  0%, 100%{ opacity: 0.45; }
+  50%{ opacity: 1; }
+}
+
+.wf-popper{
+  position: absolute;
+  bottom: 3%;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  opacity: 0;
+  filter: drop-shadow(0 0 14px rgba(227,168,59,0.45));
+}
+.wf-popper-left{ left: 2%; }
+.wf-popper-right{ right: 2%; transform: scaleX(-1); }
+.winner-fullscreen.show .wf-popper-left{ animation: wf-pop-left 0.5s cubic-bezier(.22,1,.36,1) both; }
+.winner-fullscreen.show .wf-popper-right{ animation: wf-pop-right 0.5s cubic-bezier(.22,1,.36,1) both; }
+@keyframes wf-pop-left{
+  0%{ opacity: 0; transform: rotate(10deg) scale(0.3); }
+  60%{ opacity: 1; transform: rotate(18deg) scale(1.2); }
+  100%{ opacity: 1; transform: rotate(15deg) scale(1); }
+}
+@keyframes wf-pop-right{
+  0%{ opacity: 0; transform: scaleX(-1) rotate(10deg) scale(0.3); }
+  60%{ opacity: 1; transform: scaleX(-1) rotate(18deg) scale(1.2); }
+  100%{ opacity: 1; transform: scaleX(-1) rotate(15deg) scale(1); }
+}
+
+.wf-confetti{ position: absolute; inset: 0; overflow: hidden; }
+.wf-piece{
+  position: absolute;
+  bottom: 4%;
+  opacity: 0;
+  animation: wf-burst var(--dur, 1.8s) cubic-bezier(.12,.7,.25,1) var(--delay, 0s) forwards;
+}
+.wf-piece.from-left{ left: 3%; }
+.wf-piece.from-right{ right: 3%; }
+@keyframes wf-burst{
+  0%{ transform: translate(0,0) rotate(0deg) scale(0.5); opacity: 0; }
+  8%{ opacity: 1; }
+  100%{ transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1); opacity: 0; }
+}
+.wf-p-rect{ width: 8px; height: 14px; border-radius: 2px; }
+.wf-p-dot{ width: 7px; height: 7px; border-radius: 50%; }
+.wf-p-ribbon{ width: 4px; height: 34px; border-radius: 3px; }
+.wf-p-star{
+  width: 12px; height: 12px;
+  background: currentColor;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.wf-trophy{
+  position: relative;
+  z-index: 1;
+  font-size: clamp(3rem, 10vw, 6rem);
+  opacity: 0;
+}
+.winner-fullscreen.show .wf-trophy{ animation: wf-trophy-pop 0.6s cubic-bezier(.22,1,.36,1) 0.1s both; }
+@keyframes wf-trophy-pop{
+  0%{ transform: scale(0) rotate(-15deg); opacity: 0; }
+  60%{ transform: scale(1.25) rotate(8deg); opacity: 1; }
+  100%{ transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.wf-title{
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 4.2rem);
+  color: var(--chalk);
+  text-shadow: 4px 0 0 rgba(227,168,59,0.6), -4px 0 0 rgba(76,139,127,0.4);
+  opacity: 0;
+}
+.winner-fullscreen.show .wf-title{ animation: wf-fade-up 0.7s cubic-bezier(.22,1,.36,1) 0.25s both; }
+.wf-sub{
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--mustard-bright);
+  margin-top: 10px;
+  opacity: 0;
+}
+.winner-fullscreen.show .wf-sub{ animation: wf-fade-up 0.7s ease 0.4s both; }
+@keyframes wf-fade-up{
+  from{ opacity: 0; transform: translateY(18px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
 @media (prefers-reduced-motion: reduce){
   .hero-title{ animation: ippl-pop 1s cubic-bezier(.22,1,.36,1) 0.15s both; }
   .winner-celebrate{ animation: none; }
   .confetti-piece{ animation: none; display: none; }
+  .winner-fullscreen, .winner-fullscreen *{ animation: none !important; }
+  .winner-fullscreen.show{ opacity: 1; }
 }
 
 .mom-banner{
