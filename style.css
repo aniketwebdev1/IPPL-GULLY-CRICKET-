@@ -695,6 +695,7 @@ p{ color: var(--chalk-dim); max-width: 60ch; }
 
 .match-picker{
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   margin: 24px 0;
@@ -711,6 +712,9 @@ p{ color: var(--chalk-dim); max-width: 60ch; }
   font-family: var(--font-mono);
   font-size: 0.85rem;
   cursor: pointer;
+  flex: 1 1 220px;
+  min-width: 0;
+  max-width: 100%;
 }
 .match-picker select:focus{ outline: 2px solid var(--teal); }
 
@@ -1290,4 +1294,55 @@ td:last-child, th:last-child{ text-align: right; }
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--concrete-dim);
+}
+
+/* ============================================
+   MOBILE FIXES
+   Things that were spilling past the screen edge on phones:
+   wide stat tables, the match-picker dropdown, and the
+   countdown boxes. Fixed here without touching desktop layout.
+   ============================================ */
+
+/* safety net — nothing should ever force horizontal scroll */
+img, svg, table, select, input, .btn{ max-width: 100%; }
+
+@media (max-width: 700px){
+  .section-inner{ padding: 64px 18px; }
+
+  /* Scorecard / Points tables have 6-7 columns — too tight to squeeze
+     onto a phone screen, so let just the table scroll sideways inside
+     its card instead of blowing out the page width. */
+  .stat-panel{ padding: 20px 16px; }
+  .scorecard-panel{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scorecard-panel table{ min-width: 560px; }
+  table{ font-size: 0.8rem; }
+  th, td{ padding-right: 8px; }
+
+  /* countdown boxes — let them share the row instead of overflowing it */
+  .countdown{ gap: 8px; }
+  .cd-box{
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 12px 6px;
+  }
+  .cd-box span{ font-size: 1.3rem; }
+
+  /* winner banner — tighten up spacing so score + name don't crowd */
+  .winner-banner{ padding: 16px 18px; }
+  .winner-name{ font-size: 1.4rem; }
+  .winner-congrats{ margin-left: 0; font-size: 1.2rem; }
+
+  /* fullscreen celebration — smaller trophy/text so nothing clips on
+     short phone screens, and a touch less confetti spread */
+  .wf-trophy{ font-size: clamp(2.4rem, 14vw, 3.6rem); }
+  .wf-popper{ font-size: clamp(1.8rem, 10vw, 2.8rem); bottom: 4%; }
+}
+
+@media (max-width: 420px){
+  .cd-box span{ font-size: 1.1rem; }
+  .cd-box label{ font-size: 0.6rem; }
+  .hero-title{ font-size: clamp(3.4rem, 15vw, 11rem); }
 }
