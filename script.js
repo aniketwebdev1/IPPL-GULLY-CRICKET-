@@ -15,6 +15,7 @@ const PLAYERS = [
   { number: "07", name: "Pankaj Bhaiya", role: "Wicketkeeper" },
   { number: "08", name: "Rajeev Kumar", role: "All-rounder" },
   { number: "09", name: "Hardik Swami", role: "All-rounder" },
+  { number: "10", name: "Atharv", role: "Batsman" },
 ];
 
 // ---------- 1b. TEAMS (edit this) ----------
@@ -170,93 +171,10 @@ function startCountdown(){
 // ---------- 2b. MATCH STATS ENGINE ----------
 // Reads MATCHES from matches-data.js (edit that file after every match).
 
-function strikeRate(runs, balls){
-  if (!balls) return 0;
-  return (runs / balls) * 100;
-}
-
-function economy(runsGiven, overs){
-  if (!overs) return 0;
-  return runsGiven / overs;
-}
-
-// Man of the Match points: (runs*2) + (wickets*4) + tiered batting/bowling
-// bonuses + fielding bonuses. Edit the tiers below if you want to reweigh things.
-function momBreakdown(p){
-  const base = (p.runs * 2) + (p.wickets * 4);
-
-  // batting bonus — only kicks in once strike rate crosses 100
-  let batBonus = 0;
-  if (p.balls > 0){
-    const sr = strikeRate(p.runs, p.balls);
-    if (sr >= 220)      batBonus = 7;
-    else if (sr >= 180) batBonus = 5;
-    else if (sr >= 140) batBonus = 4;
-    else if (sr >= 110) batBonus = 2;
-    else if (sr >= 100) batBonus = 1;
-  }
-
-  // bowling bonus — tighter economy = more points (best tier only, not stacked)
-  let bowlBonus = 0;
-  if (p.overs > 0){
-    const econ = economy(p.runsGiven, p.overs);
-    if (econ < 3)       bowlBonus = 5;
-    else if (econ < 4)  bowlBonus = 3;
-    else if (econ < 5)  bowlBonus = 2;
-    else if (econ <= 6) bowlBonus = 1;
-  }
-
-  // fielding bonus
-  const fieldBonus = ((p.catches || 0) * 2) + ((p.runOuts || 0) * 2);
-
-  const total = Math.round((base + batBonus + bowlBonus + fieldBonus) * 10) / 10;
-  return { base, batBonus, bowlBonus, fieldBonus, total };
-}
-
-function momPoints(p){
-  return momBreakdown(p).total;
-}
-
-function findManOfTheMatch(match){
-  let best = null;
-  match.players.forEach(p => {
-    const pts = momPoints(p);
-    if (!best || pts > best.points) best = { ...p, points: pts };
-  });
-  return best;
-}
-
-// Short, 2-3 line stat-based report per player for a given match.
-function playerReport(p){
-  const sr = strikeRate(p.runs, p.balls);
-  const econ = economy(p.runsGiven, p.overs);
-  const lines = [];
-
-  // batting line
-  if (p.balls > 0){
-    if (p.runs >= 25) lines.push(`Bat se ${p.runs} runs (SR ${sr.toFixed(0)}) — solid knock, momentum banaye rakha.`);
-    else if (sr >= 110) lines.push(`${p.runs} runs off ${p.balls} balls, SR ${sr.toFixed(0)} — jitna khela, tez khela.`);
-    else if (sr < 70) lines.push(`${p.runs} runs off ${p.balls} balls — strike rate thodi slow rahi, thoda aur risk lene ki zaroorat.`);
-    else lines.push(`${p.runs} runs off ${p.balls} balls — steady par unremarkable knock.`);
-  } else {
-    lines.push("Batting nahi mili is match mein.");
-  }
-
-  // bowling line
-  if (p.overs > 0){
-    if (p.wickets >= 2 && econ <= 6) lines.push(`Bowling mein ${p.wickets} wkts @ econ ${econ.toFixed(1)} — match-winning spell.`);
-    else if (p.wickets >= 1) lines.push(`${p.wickets} wkt(s) @ econ ${econ.toFixed(1)} in bowling.`);
-    else if (econ <= 5) lines.push(`Wicket nahi mila par econ ${econ.toFixed(1)} tight rakha, runs nahi bahne diye.`);
-    else lines.push(`${p.overs} overs mein econ ${econ.toFixed(1)} — line-length pe kaam chahiye.`);
-  }
-
-  // improvement nudge
-  if (p.balls > 0 && sr < 70) lines.push("Improvement: rotate strike zyada karo, singles chhodo mat.");
-  else if (p.overs > 0 && econ >= 9) lines.push("Improvement: yorkers/variations practice karo, boundary rok ke rakho.");
-  else if (p.balls === 0 && p.overs === 0) lines.push("Agla match zaroor khilao — dono discipline mein contribute kar sakta hai.");
-
-  return lines.join(" ");
-}
+// strikeRate, economy, momBreakdown, momPoints, findManOfTheMatch,
+// playerReport, matchResult, formatMatchDate now live in stats-shared.js
+// (shared with the Past Records page) — index.html loads that file
+// before this one.
 
 // Winner banner — reads match.scores (team totals) and shows which team
 // won, with a confetti/glow celebration. If scores are tied, shows a
@@ -297,15 +215,8 @@ function renderWinnerBanner(match){
 
   const winnerName = sorted[0][0];
   const scoreLine = entries.map(([name, runs]) => `${name} ${runs}`).join("  vs  ");
-  banner.dataset.winner = winnerName;
-  banner.dataset.scoreline = scoreLine;
-  banner.className = "winner-banner reveal in-view winner-celebrate";
+  banner.className = "winner-banner reveal in-view";
   banner.innerHTML = `
-    <span class="confetti-piece">🎉</span>
-    <span class="confetti-piece">🎊</span>
-    <span class="confetti-piece">🏏</span>
-    <span class="confetti-piece">🎉</span>
-    <span class="confetti-piece">🎊</span>
     <div class="winner-content">
       <div class="winner-scoreline">
         ${entries.map(([name, runs]) => `<span class="wts"><span class="wts-name">${name}</span> made <span class="wts-runs">${runs}</span></span>`).join('<span class="winner-vs">vs</span>')}
@@ -317,145 +228,6 @@ function renderWinnerBanner(match){
       </div>
     </div>
   `;
-}
-
-/* ============================================
-   FULLSCREEN WIN CELEBRATION
-   Triggers when the winner banner scrolls into view:
-   full-screen confetti popper burst + a short synthesized
-   victory fanfare (no audio file needed).
-   ============================================ */
-
-// Audio is locked by browsers until a real user gesture. We grab/resume
-// a shared AudioContext on the first tap/click anywhere on the page so
-// it's ready by the time someone scrolls to the winner banner.
-let sharedAudioCtx = null;
-function getAudioCtx(){
-  const Ctx = window.AudioContext || window.webkitAudioContext;
-  if (!Ctx) return null;
-  if (!sharedAudioCtx) sharedAudioCtx = new Ctx();
-  if (sharedAudioCtx.state === "suspended") sharedAudioCtx.resume();
-  return sharedAudioCtx;
-}
-["click", "touchstart", "keydown"].forEach(evt =>
-  document.addEventListener(evt, () => getAudioCtx(), { once: true, passive: true })
-);
-
-function playVictorySound(){
-  const ctx = getAudioCtx();
-  if (!ctx) return;
-  const now = ctx.currentTime;
-
-  // ascending "ta-da" arpeggio
-  const notes = [523.25, 659.25, 783.99, 1046.5]; // C5 E5 G5 C6
-  notes.forEach((freq, i) => {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = "triangle";
-    osc.frequency.value = freq;
-    const start = now + i * 0.11;
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(0.22, start + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.5);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(start);
-    osc.stop(start + 0.55);
-  });
-
-  // soft crowd-cheer style noise swell underneath
-  const dur = 0.9;
-  const bufferSize = Math.floor(ctx.sampleRate * dur);
-  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-  const data = buffer.getChannelData(0);
-  for (let i = 0; i < bufferSize; i++){
-    const envelope = Math.sin((Math.PI * i) / bufferSize);
-    data[i] = (Math.random() * 2 - 1) * envelope * 0.5;
-  }
-  const noise = ctx.createBufferSource();
-  noise.buffer = buffer;
-  const noiseGain = ctx.createGain();
-  noiseGain.gain.setValueAtTime(0.15, now);
-  noise.connect(noiseGain);
-  noiseGain.connect(ctx.destination);
-  noise.start(now);
-}
-
-const WF_COLORS = ["#F5C567", "#E3A83B", "#EC5FA6", "#8B6BD1", "#6BAFA1", "#F4EFE3"];
-
-function spawnFullscreenCelebration(winnerName, scoreLine){
-  const overlay = document.getElementById("winnerFullscreen");
-  const confettiWrap = document.getElementById("wfConfetti");
-  const titleEl = document.getElementById("wfTitle");
-  const subEl = document.getElementById("wfSub");
-  if (!overlay || !confettiWrap) return;
-
-  titleEl.textContent = `${winnerName} WINS!`;
-  subEl.textContent = scoreLine;
-
-  confettiWrap.innerHTML = "";
-  const pieceTotal = window.matchMedia("(max-width: 640px)").matches ? 42 : 72;
-
-  for (let i = 0; i < pieceTotal; i++){
-    const fromLeft = i % 2 === 0;
-    const roll = Math.random();
-    const shapeClass = roll > 0.75 ? "wf-p-star" : roll > 0.5 ? "wf-p-dot" : roll > 0.3 ? "wf-p-ribbon" : "wf-p-rect";
-
-    const el = document.createElement("span");
-    el.className = `wf-piece ${shapeClass} ${fromLeft ? "from-left" : "from-right"}`;
-
-    const spread = 25 + Math.random() * 85; // vw, outward from the corner
-    const rise = 55 + Math.random() * 80;   // vh, upward
-    const tx = fromLeft ? spread : -spread;
-    const ty = -rise;
-    const rot = (Math.random() * 900 - 450).toFixed(0);
-    const dur = (1.5 + Math.random() * 1.3).toFixed(2);
-    const delay = (Math.random() * 0.4).toFixed(2);
-    const color = WF_COLORS[Math.floor(Math.random() * WF_COLORS.length)];
-
-    el.style.setProperty("--tx", tx + "vw");
-    el.style.setProperty("--ty", ty + "vh");
-    el.style.setProperty("--rot", rot + "deg");
-    el.style.setProperty("--dur", dur + "s");
-    el.style.setProperty("--delay", delay + "s");
-    if (shapeClass === "wf-p-star"){
-      el.style.color = color;
-    } else {
-      el.style.background = color;
-    }
-    confettiWrap.appendChild(el);
-  }
-
-  overlay.classList.add("show");
-  playVictorySound();
-
-  clearTimeout(spawnFullscreenCelebration._t);
-  spawnFullscreenCelebration._t = setTimeout(() => {
-    overlay.classList.remove("show");
-  }, 3000);
-}
-
-// Fires the fullscreen celebration each time the winner banner scrolls
-// into view (and resets so scrolling away + back triggers it again).
-function initWinnerCelebration(){
-  const banner = document.getElementById("winnerBanner");
-  if (!banner || !("IntersectionObserver" in window)) return;
-
-  let armed = true;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.55){
-        if (armed && banner.classList.contains("winner-celebrate")){
-          spawnFullscreenCelebration(banner.dataset.winner || "", banner.dataset.scoreline || "");
-          armed = false;
-        }
-      } else if (!entry.isIntersecting){
-        armed = true;
-      }
-    });
-  }, { threshold: [0, 0.55] });
-
-  observer.observe(banner);
 }
 
 function renderMatchCenter(){
@@ -648,7 +420,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTeams();
   renderSeasonTotals();
   renderMatchCenter();
-  initWinnerCelebration();
   renderWeeklySchedule();
   startLiveClock();
   startCountdown();
@@ -657,109 +428,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initScoreCount();
 });
-/* ============================================
-   IPPL — matches-data.js
-   ⚡ YEH FILE HAR MATCH KE BAAD EDIT KARO ⚡
-
-   Har match khatam hone ke baad, ek naya object
-   MATCHES array mein sabse UPAR (start mein) add karo.
-   Player ka naam EXACTLY wahi likho jo script.js ke
-   PLAYERS array mein hai (spelling match honi chahiye).
-
-   Agar koi player us match mein bowling nahi kar raha
-   tha, toh wickets/overs/runsGiven ko 0 hi rehne do.
-   Agar batting nahi ki, runs/balls 0 rehne do.
-   Catch nahi liya ya run-out nahi kiya toh catches/
-   runOuts ko 0 hi rehne do.
-
-   Har match object mein ek "scores" field bhi hai — dono team
-   ke final totals (extras milaake, isliye batters ke runs ke
-   exact sum se match nahi karega, aur woh normal hai). Winner
-   banner isi se decide hota hai — jis team ka score zyada,
-   wahi winner ban ke celebrate hota hai.
-
-   ⚠️ Kam se kam pichhle 3 din ke matches yahan hamesha
-   maujood rehne chahiye — purane matches delete mat karo,
-   sirf naye upar add karte jao. Isse Match Center mein
-   history dekhi ja sakti hai aur Orange/Purple Cap sahi
-   season data se calculate hote hain.
-   ============================================ */
-
-const MATCHES = [
-  // ---- Sample match — apna asli data isi format mein daalo ----
-  {
-    id: "m1",
-    date: "2026-07-20",
-    label: "Yogi Blasters vs Rudra Challengers",
-    ground: "Home Gully Ground",
-    // ⚡ Team totals (includes extras/wides etc., so they won't always
-    // exactly equal the sum of listed batters) — used for the Winner banner.
-    scores: {
-      "Yogi Blasters": 84,
-      "Rudra Challengers": 70
-    },
-    players: [
-      // name must match PLAYERS[].name in script.js exactly
-      { name: "Aniket Chaudhary", runs: 23, balls: 20, wickets: 1, overs: 2, runsGiven: 7, catches: 0, runOuts: 0 },
-      { name: "Yogi Ashish",      runs: 26,  balls: 18, wickets: 0, overs: 4, runsGiven: 20, catches: 0, runOuts: 0 },
-      { name: "Rudra Chaudhary",  runs: 5, balls: 4, wickets: 0, overs: 4, runsGiven: 30,  catches: 0, runOuts: 0 },
-      { name: "YUG",        runs: 28, balls: 18, wickets: 0, overs: 3, runsGiven: 20, catches: 0, runOuts: 0 },
-      { name: "Devansh Bhaiya",   runs: 6, balls: 11, wickets: 1, overs: 2, runsGiven: 11,  catches: 1, runOuts: 0 },
-      { name: "Chirag Bhaiya",    runs: 6,  balls: 9,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Pankaj Bhaiya",    runs: 52, balls: 42,  wickets: 0, overs: 4, runsGiven: 33,  catches: 0, runOuts: 0 },
-      { name: "Rajeev Kumar",     runs: 1,  balls: 2,  wickets: 1, overs: 2, runsGiven: 19, catches: 0, runOuts: 0 }
-    ]
-  }
-
-  // ---- Naya match yahan ADD karo (upar wale se pehle, comma laga ke) ----
-  // {
-  //   id: "m2",
-  //   date: "2026-08-03",
-  //   label: "Yogi Blasters vs Rudra Challengers",
-  //   ground: "Home Gully Ground",
-  //   scores: { "Yogi Blasters": 0, "Rudra Challengers": 0 },
-  //   players: [
-  //     { name: "Aniket Chaudhary", runs: 0, balls: 0, wickets: 0, overs: 0, runsGiven: 0, catches: 0, runOuts: 0 },
-  //     ...
-  //   ]
-  // },
-];
-
-/* ============================================
-   SEASON_TOTALS
-   ⚡ YEH BHI DAILY / HAR MATCH KE BAAD EDIT KARO ⚡
-
-   Yeh season ki running total hai — har player ke
-   season bhar ke total runs (batters mein) aur total
-   wickets (bowlers mein). Har match ke baad bas number
-   ko current total mein add karke yahan update kar do.
-
-   Orange Cap (sabse zyada runs) aur Purple Cap (sabse
-   zyada wickets) yahi data se automatically nikalte hain
-   — jo naam sabse upar aa jaaye, wahi winner ban jaata hai.
-   ============================================ */
-
-const SEASON_TOTALS = {
-  batters: [
-    { name: "Rudra Chaudhary",  runs: 5 },
-    { name: "Aniket Chaudhary", runs: 23 },
-    { name: "Devansh Bhaiya",   runs: 6 },
-    { name: "YUG",              runs: 28 },
-    { name: "Pankaj Bhaiya",    runs: 52 },
-    { name: "Rajeev Kumar",     runs: 1 },
-    { name: "Yogi Ashish",      runs: 26  },
-    { name: "Chirag Bhaiya",    runs: 6 },
-    { name: "Hardik Swami",     runs: 0  }
-  ],
-  bowlers: [
-    { name: "Yogi Ashish",      wickets: 0 },
-    { name: "Chirag Bhaiya",    wickets: 0 },
-    { name: "Aniket Chaudhary", wickets: 1 },
-    { name: "YUG",              wickets: 0 },
-    { name: "Rajeev Kumar",     wickets: 1 },
-    { name: "Rudra Chaudhary",  wickets: 0 },
-    { name: "Devansh Bhaiya",   wickets: 1 },
-    { name: "Pankaj Bhaiya",    wickets: 0 },
-    { name: "Hardik Swami",     wickets: 0 }
-  ]
-};
