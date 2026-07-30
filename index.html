@@ -23,6 +23,7 @@
       <a href="#squad">Squad</a>
       <a href="#matchcenter">Match Center</a>
       <a href="#fixtures">Fixtures</a>
+      <a href="#records">Past Records</a>
       <a href="#toss">Toss</a>
       <a href="#rules">Gully Rules</a>
     </nav>
@@ -191,10 +192,27 @@
   </div>
 </section>
 
+<!-- ============ PAST RECORDS ============ -->
+<section class="records-page" id="records">
+  <div class="section-inner">
+    <p class="section-label">05 — Archive</p>
+    <h2 class="reveal">Past Records</h2>
+    <p class="edit-note reveal">✏️ Yeh list <code>matches-data.js</code> se seedha aata hai — jab bhi wahan naya match add karoge, yahan date-wise apne aap show ho jaayega. Kisi bhi date pe click karo, uska poora scorecard khul jaayega.</p>
+
+    <div class="match-picker reveal">
+      <label for="recordsSelect">Date select karo:</label>
+      <select id="recordsSelect"></select>
+    </div>
+
+    <ul class="records-list reveal" id="recordsList"></ul>
+    <p class="records-empty" id="recordsEmpty" style="display:none;">Abhi tak koi match record nahi hai — <code>matches-data.js</code> mein match add karo.</p>
+  </div>
+</section>
+
 <!-- ============ TOSS SIMULATOR ============ -->
 <section class="toss" id="toss">
   <div class="section-inner toss-inner">
-    <p class="section-label">05 — Toss time</p>
+    <p class="section-label">06 — Toss time</p>
     <h2 class="reveal">Sikka uchalo, faisla karo.</h2>
     <p class="reveal">Har match se pehle wahi purana jhagda — bat karna hai ya bowl. Ab decide karega sikka.</p>
 
@@ -213,7 +231,7 @@
 <!-- ============ RULES ============ -->
 <section class="rules" id="rules">
   <div class="section-inner">
-    <p class="section-label">06 — Gully rules</p>
+    <p class="section-label">07 — Gully rules</p>
     <h2 class="reveal">Kyunki gully cricket ka apna constitution hota hai.</h2>
     <div class="rules-grid">
       <div class="rule-card reveal">
@@ -245,25 +263,16 @@
       <p>Evening gully cricket, since 2026.</p>
     </div>
     <div class="footer-links">
+      <a href="#records">Past Records</a>
       <a href="https://chat.whatsapp.com/Jui4usYF5fk5azBTB56OIB?s=sh&p=a&ilr=0" target="_blank" rel="noopener">WhatsApp Group ↗</a>
     </div>
   </div>
   <p class="footer-credit">Built by the IPPL squad. Edit everything, break nothing.</p>
 </footer>
 
-<!-- Fullscreen win celebration — triggered by script.js when the winner banner scrolls into view -->
-<div class="winner-fullscreen" id="winnerFullscreen" aria-hidden="true">
-  <div class="wf-inner">
-    <span class="wf-popper wf-popper-left">🎉</span>
-    <span class="wf-popper wf-popper-right">🎉</span>
-    <div class="wf-confetti" id="wfConfetti"></div>
-    <div class="wf-trophy">🏆</div>
-    <div class="wf-title" id="wfTitle">WINS!</div>
-    <div class="wf-sub" id="wfSub"></div>
-  </div>
-</div>
-
 <script src="matches-data.js"></script>
+<script src="stats-shared.js"></script>
+<script src="records.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
