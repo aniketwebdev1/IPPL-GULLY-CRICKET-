@@ -114,7 +114,7 @@ const SEASON_TOTALS = {
   bowlers: [
     { name: "Yogi Ashish",      wickets: 1 },
     { name: "Chirag Bhaiya",    wickets: 0 },
-    { name: "Aniket Chaudhary", wickets: 1 },
+    { name: "Aniket Chaudhary", wickets: 2 },
     { name: "YUG",              wickets: 1 },
     { name: "Rajeev Kumar",     wickets: 2 },
     { name: "Rudra Chaudhary",  wickets: 0 },
