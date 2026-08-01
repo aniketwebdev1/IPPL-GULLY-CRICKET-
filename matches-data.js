@@ -101,7 +101,7 @@ const SEASON_TOTALS = {
     { name: "Rudra Chaudhary",  runs: 6 },
     { name: "Aniket Chaudhary", runs: 28 },
     { name: "Devansh Bhaiya",   runs: 10 },
-    { name: "YUG",              runs: 50 },
+    { name: "YUG",              runs: 48 },
     { name: "Pankaj Bhaiya",    runs: 94 },
     { name: "Rajeev Kumar",     runs: 11 },
     { name: "Yogi Ashish",      runs: 29  },
