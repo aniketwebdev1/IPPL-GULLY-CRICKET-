@@ -1317,7 +1317,7 @@ img, svg, table, select, input, .btn{ max-width: 100%; }
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .scorecard-panel table{ min-width: 560px; }
+  .scorecard-panel table{ min-width: 680px; }
   table{ font-size: 0.8rem; }
   th, td{ padding-right: 8px; }
 

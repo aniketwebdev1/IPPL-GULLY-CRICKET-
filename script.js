@@ -267,8 +267,10 @@ function renderMatchCenter(){
       <tr class="${mom && p.name === mom.name ? "mom-row" : ""}">
         <td>${p.name}${mom && p.name === mom.name ? " 🏆" : ""}</td>
         <td>${p.base}</td>
-        <td>${p.batBonus ? "+" + p.batBonus : "—"}</td>
-        <td>${p.bowlBonus ? "+" + p.bowlBonus : "—"}</td>
+        <td>${p.batBonus > 0 ? "+" + p.batBonus : "—"}</td>
+        <td>${p.batBonus < 0 ? p.batBonus : "—"}</td>
+        <td>${p.bowlBonus > 0 ? "+" + p.bowlBonus : "—"}</td>
+        <td>${p.bowlBonus < 0 ? p.bowlBonus : "—"}</td>
         <td>${p.fieldBonus ? "+" + p.fieldBonus : "—"}</td>
         <td class="points-total">${p.total}</td>
       </tr>

@@ -20,7 +20,7 @@ function economy(runsGiven, overs){
 function momBreakdown(p){
   const base = (p.runs * 2) + (p.wickets * 4);
 
-  // batting bonus — only kicks in once strike rate crosses 100
+  // batting bonus — kicks in once strike rate crosses 100; penalty once it drops below 70
   let batBonus = 0;
   if (p.balls > 0){
     const sr = strikeRate(p.runs, p.balls);
@@ -29,16 +29,20 @@ function momBreakdown(p){
     else if (sr >= 140) batBonus = 4;
     else if (sr >= 110) batBonus = 2;
     else if (sr >= 100) batBonus = 1;
+    else if (sr <= 50)  batBonus = -3;
+    else if (sr < 70)   batBonus = -2;
   }
 
-  // bowling bonus — tighter economy = more points (best tier only, not stacked)
+  // bowling bonus — tighter economy = more points; penalty once it gets too expensive
   let bowlBonus = 0;
   if (p.overs > 0){
     const econ = economy(p.runsGiven, p.overs);
-    if (econ < 3)       bowlBonus = 5;
-    else if (econ < 4)  bowlBonus = 3;
-    else if (econ < 5)  bowlBonus = 2;
-    else if (econ <= 6) bowlBonus = 1;
+    if (econ < 3)        bowlBonus = 5;
+    else if (econ < 4)   bowlBonus = 3;
+    else if (econ < 5)   bowlBonus = 2;
+    else if (econ <= 6)  bowlBonus = 1;
+    else if (econ > 12)  bowlBonus = -3;
+    else if (econ > 10)  bowlBonus = -2;
   }
 
   // fielding bonus
