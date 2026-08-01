@@ -133,10 +133,10 @@
     </div>
 
     <h3 class="reports-heading reveal">Individual Score (MOM Formula)</h3>
-    <p class="edit-note reveal">✏️ Formula: (Runs×2) + (Wickets×4) + Batting Bonus (SR≥100) + Bowling Bonus (Economy tiers) + Fielding Bonus (Catch/Run-out ×2 har ek).</p>
+    <p class="edit-note reveal">✏️ Formula: (Runs×2) + (Wickets×4) + Batting Bonus (SR≥100, penalty if SR&lt;70/-2, SR≤50/-3) + Bowling Bonus (Economy tiers, penalty if Econ&gt;10/-2, Econ&gt;12/-3) + Fielding Bonus (Catch/Run-out ×2 har ek).</p>
     <div class="stat-panel reveal scorecard-panel">
       <table>
-        <thead><tr><th>Player</th><th>Base</th><th>Bat Bonus</th><th>Bowl Bonus</th><th>Fielding</th><th>Total</th></tr></thead>
+        <thead><tr><th>Player</th><th>Base</th><th>Bat Bonus</th><th>Batting Deduction</th><th>Bowl Bonus</th><th>Bowling Deduction</th><th>Fielding</th><th>Total</th></tr></thead>
         <tbody id="pointsBody"></tbody>
       </table>
     </div>
