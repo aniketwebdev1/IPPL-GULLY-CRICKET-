@@ -22,7 +22,7 @@ function renderRecordsList(){
 
   list.innerHTML = ordered.map((match, i) => {
     const result = matchResult(match);
-    const dateNice = formatMatchDate(match.date);
+    const dateNice = formatMatchDateWithOrdinal(match, MATCHES);
 
     let resultChip = `<span class="rec-chip rec-chip-pending">Scorecard available</span>`;
     if (result && result.isTie){
@@ -67,7 +67,7 @@ function renderRecordsPicker(ordered){
   if (!select || !ordered || ordered.length === 0) return;
 
   select.innerHTML = ordered.map(match =>
-    `<option value="${match.id}">${formatMatchDate(match.date)} — ${match.label}</option>`
+    `<option value="${match.id}">${formatMatchDateWithOrdinal(match, MATCHES)} — ${match.label}</option>`
   ).join("");
 
   select.addEventListener("change", () => {

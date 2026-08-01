@@ -11,8 +11,8 @@ const PLAYERS = [
   { number: "03", name: "Rudra Chaudhary", role: "Batsman" },
   { number: "04", name: "YUG", role: "All-rounder" },
   { number: "05", name: "Devansh Bhaiya", role: "Batsman" },
-  { number: "06", name: "Chirag Bhaiya", role: "Batsman" },
-  { number: "07", name: "Pankaj Bhaiya", role: "All-rounder" },
+  { number: "06", name: "Chirag Bhaiya", role: "Bowler" },
+  { number: "07", name: "Pankaj Bhaiya", role: "Wicketkeeper" },
   { number: "08", name: "Rajeev Kumar", role: "All-rounder" },
   { number: "09", name: "Hardik Swami", role: "All-rounder" },
   { number: "10", name: "Atharv", role: "Batsman" },
@@ -239,7 +239,7 @@ function renderMatchCenter(){
   if (!select || !MATCHES || !MATCHES.length) return;
 
   select.innerHTML = MATCHES.map(m =>
-    `<option value="${m.id}">${new Date(m.date).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})} — ${m.label}</option>`
+    `<option value="${m.id}">${formatMatchDateWithOrdinal(m, MATCHES)} — ${m.label}</option>`
   ).join("");
 
   function draw(matchId){

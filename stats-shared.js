@@ -118,3 +118,23 @@ function formatMatchDate(dateStr){
   if (isNaN(d)) return dateStr;
   return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 }
+
+// If two (or more) matches share the same date, this appends
+// "1st Match" / "2nd Match" / etc. so they're distinguishable in
+// dropdowns and the records list. Order is by match id number
+// (m1, m2, m3...) — the match added first for that date is "1st".
+// Matches added on their own date (no same-day sibling) are
+// unaffected — just the plain formatted date.
+function formatMatchDateWithOrdinal(match, allMatches){
+  const plain = formatMatchDate(match.date);
+  const sameDate = (allMatches || []).filter(m => m.date === match.date);
+  if (sameDate.length <= 1) return plain;
+
+  const idNum = m => parseInt((String(m.id).match(/\d+/) || [0])[0], 10);
+  const ordered = [...sameDate].sort((a, b) => idNum(a) - idNum(b));
+  const idx = ordered.findIndex(m => m.id === match.id);
+  const ordinals = ["1st", "2nd", "3rd", "4th", "5th", "6th"];
+  const ordinal = ordinals[idx] || `${idx + 1}th`;
+
+  return `${plain} — ${ordinal} Match`;
+}

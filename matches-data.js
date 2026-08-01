@@ -32,6 +32,60 @@
 
 const MATCHES = [
   {
+    id: "m5",
+    date: "2026-08-01",
+    label: "Rudra Challengers vs Yogi Blasters",
+    ground: "Home Gully Ground",
+    // ⚡ Team totals (includes extras/wides etc., so they won't always
+    // exactly equal the sum of listed batters) — used for the Winner banner.
+    scores: {
+      "Rudra Challengers": 44,
+      "Yogi Blasters": 43
+    },
+    players: [
+      // name must match PLAYERS[].name in script.js exactly
+      // Note: Atharv genuinely played across both teams this match — his
+      // batting is combined into one line (9 runs off 28 balls).
+      { name: "Pankaj Bhaiya",    runs: 2,  balls: 6,  wickets: 2, overs: 1.5,  runsGiven: 9,  catches: 1, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 25, balls: 23, wickets: 2, overs: 3,    runsGiven: 19, catches: 0, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 3,  balls: 8,  wickets: 1, overs: 2,    runsGiven: 11, catches: 0, runOuts: 0 },
+      { name: "Devansh Bhaiya",   runs: 1,  balls: 3,  wickets: 0, overs: 1,    runsGiven: 4,  catches: 0, runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 0,  balls: 2,  wickets: 2, overs: 3.4, runsGiven: 26, catches: 0, runOuts: 0 },
+      { name: "Aniket Chaudhary", runs: 10, balls: 9,  wickets: 1, overs: 2,    runsGiven: 9,  catches: 0, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 11, balls: 11, wickets: 0, overs: 1,    runsGiven: 5,  catches: 0, runOuts: 0 },
+      { name: "YUG",               runs: 4, balls: 3,  wickets: 1, overs: 1,    runsGiven: 4,  catches: 0, runOuts: 0 },
+      { name: "Atharv",           runs: 9,  balls: 28, wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Hardik Swami",     runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 }
+    ]
+  },
+  {
+    id: "m4",
+    date: "2026-08-01",
+    label: "Rudra Challengers vs Yogi Blasters",
+    ground: "Home Gully Ground",
+    // ⚡ Team totals (includes extras/wides etc., so they won't always
+    // exactly equal the sum of listed batters) — used for the Winner banner.
+    scores: {
+      "Rudra Challengers": 26,
+      "Yogi Blasters": 27
+    },
+    players: [
+      // name must match PLAYERS[].name in script.js exactly
+      // Note: "Hardik" and "Sonu" in the original scorecard were both
+      // naming mix-ups for the same real player — merged here into Chirag Bhaiya.
+      { name: "Rudra Chaudhary",  runs: 4,  balls: 5,  wickets: 0, overs: 1,    runsGiven: 9,  catches: 0, runOuts: 0 },
+      { name: "Atharv",           runs: 3,  balls: 8,  wickets: 0, overs: 1,    runsGiven: 14, catches: 0, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 9,  balls: 9,  wickets: 0, overs: 1,    runsGiven: 4,  catches: 0, runOuts: 0 },
+      { name: "Pankaj Bhaiya",    runs: 2,  balls: 2,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Devansh Bhaiya",   runs: 1,  balls: 9,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 1 },
+      { name: "Yogi Ashish",      runs: 17, balls: 12, wickets: 1, overs: 2,    runsGiven: 7,  catches: 0, runOuts: 0 },
+      { name: "Aniket Chaudhary", runs: 3,  balls: 3,  wickets: 3, overs: 2.1, runsGiven: 7,  catches: 0, runOuts: 0 },
+      { name: "YUG",               runs: 1, balls: 3,  wickets: 0, overs: 1,    runsGiven: 12, catches: 1, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Hardik Swami",     runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 }
+    ]
+  },
+  {
     id: "m3",
     date: "2026-07-30",
     label: "Rudra Challengers vs Yogi Blasters",
@@ -98,26 +152,26 @@ const MATCHES = [
 
 const SEASON_TOTALS = {
   batters: [
-    { name: "Rudra Chaudhary",  runs: 6 },
-    { name: "Aniket Chaudhary", runs: 28 },
-    { name: "Devansh Bhaiya",   runs: 10 },
-    { name: "YUG",              runs: 48 },
-    { name: "Pankaj Bhaiya",    runs: 94 },
-    { name: "Rajeev Kumar",     runs: 11 },
-    { name: "Yogi Ashish",      runs: 29  },
-    { name: "Chirag Bhaiya",    runs: 6 },
+    { name: "Rudra Chaudhary",  runs: 35 },
+    { name: "Aniket Chaudhary", runs: 38 },
+    { name: "Devansh Bhaiya",   runs: 12 },
+    { name: "YUG",              runs: 55 },
+    { name: "Pankaj Bhaiya",    runs: 98 },
+    { name: "Rajeev Kumar",     runs: 22 },
+    { name: "Yogi Ashish",      runs: 46  },
+    { name: "Chirag Bhaiya",    runs: 18 },
     { name: "Hardik Swami",     runs: 6  },
-    { name: "Atharv",           runs: 7 }
+    { name: "Atharv",           runs: 19 }
   ],
   bowlers: [
-    { name: "Yogi Ashish",      wickets: 1 },
-    { name: "Chirag Bhaiya",    wickets: 0 },
-    { name: "Aniket Chaudhary", wickets: 1 },
-    { name: "YUG",              wickets: 1 },
+    { name: "Yogi Ashish",      wickets: 4 },
+    { name: "Chirag Bhaiya",    wickets: 1 },
+    { name: "Aniket Chaudhary", wickets: 5 },
+    { name: "YUG",              wickets: 2 },
     { name: "Rajeev Kumar",     wickets: 2 },
-    { name: "Rudra Chaudhary",  wickets: 0 },
+    { name: "Rudra Chaudhary",  wickets: 2 },
     { name: "Devansh Bhaiya",   wickets: 1 },
-    { name: "Pankaj Bhaiya",    wickets: 0 },
+    { name: "Pankaj Bhaiya",    wickets: 2 },
     { name: "Hardik Swami",     wickets: 1 },
     { name: "Atharv",           wickets: 0 }
   ]
