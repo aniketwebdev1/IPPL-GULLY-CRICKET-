@@ -32,6 +32,32 @@
 
 const MATCHES = [
   {
+    id: "m8",
+    date: "2026-08-05",
+    label: "Royal Challengers vs Kings",
+    ground: "Home Gully Ground",
+    // ⚡ Team totals (includes extras/wides etc., so they won't always
+    // exactly equal the sum of listed batters) — used for the Winner banner.
+    scores: {
+      "Royal Challengers": 65,
+      "Kings": 58
+    },
+    players: [
+      // name must match PLAYERS[].name in script.js exactly
+      // Atharv batted across both teams again, combined into one line (3 runs off 11 balls).
+      { name: "Rudra Chaudhary",  runs: 15, balls: 10, wickets: 1, overs: 3,    runsGiven: 22, catches: 0, runOuts: 0 },
+      { name: "Aniket Chaudhary", runs: 17, balls: 23, wickets: 1, overs: 3,    runsGiven: 16, catches: 0, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 20, balls: 11, wickets: 0, overs: 3,    runsGiven: 20, catches: 0, runOuts: 0 },
+      { name: "Atharv",           runs: 3,  balls: 11, wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Devansh Bhaiya",   runs: 18, balls: 24, wickets: 1, overs: 2,    runsGiven: 23, catches: 0, runOuts: 0 },
+      { name: "YUG",               runs: 0, balls: 3,  wickets: 3, overs: 3.33, runsGiven: 12, catches: 0, runOuts: 0 },
+      { name: "Pankaj Bhaiya",    runs: 28, balls: 22, wickets: 0, overs: 3,    runsGiven: 30, catches: 0, runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Hardik Swami",     runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 }
+    ]
+  },
+  {
     id: "m7",
     date: "2026-08-04",
     label: "Royal Challengers vs Kings",
@@ -77,7 +103,7 @@ const MATCHES = [
       // mix-up). Atharv genuinely batted across both teams this match, so
       // his line is combined (12 runs off 18 balls).
       { name: "Pankaj Bhaiya",    runs: 82, balls: 49, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Rudra Chaudhary",  runs: 11, balls: 15, wickets: 2, overs: 3, runsGiven: 20, catches: 0, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 11, balls: 15, wickets: 3, overs: 3, runsGiven: 20, catches: 0, runOuts: 0 },
       { name: "Chirag Bhaiya",    runs: 7,  balls: 6,  wickets: 0, overs: 3, runsGiven: 23, catches: 1, runOuts: 0 },
       { name: "Devansh Bhaiya",   runs: 1,  balls: 3,  wickets: 1, overs: 2, runsGiven: 17, catches: 0, runOuts: 1 },
       { name: "Atharv",           runs: 12, balls: 18, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
@@ -209,25 +235,25 @@ const MATCHES = [
 
 const SEASON_TOTALS = {
   batters: [
-    { name: "Rudra Chaudhary",  runs: 51 },
-    { name: "Aniket Chaudhary", runs: 77 },
-    { name: "Devansh Bhaiya",   runs: 14 },
+    { name: "Rudra Chaudhary",  runs: 66 },
+    { name: "Aniket Chaudhary", runs: 94 },
+    { name: "Devansh Bhaiya",   runs: 32 },
     { name: "YUG",              runs: 76 },
-    { name: "Pankaj Bhaiya",    runs: 198 },
+    { name: "Pankaj Bhaiya",    runs: 226 },
     { name: "Rajeev Kumar",     runs: 31 },
     { name: "Yogi Ashish",      runs: 59  },
-    { name: "Chirag Bhaiya",    runs: 68 },
+    { name: "Chirag Bhaiya",    runs: 88 },
     { name: "Hardik Swami",     runs: 6  },
-    { name: "Atharv",           runs: 38 }
+    { name: "Atharv",           runs: 41 }
   ],
   bowlers: [
     { name: "Yogi Ashish",      wickets: 6 },
     { name: "Chirag Bhaiya",    wickets: 2 },
-    { name: "Aniket Chaudhary", wickets: 7 },
-    { name: "YUG",              wickets: 5 },
+    { name: "Aniket Chaudhary", wickets: 8 },
+    { name: "YUG",              wickets: 8 },
     { name: "Rajeev Kumar",     wickets: 2 },
-    { name: "Rudra Chaudhary",  wickets: 4 },
-    { name: "Devansh Bhaiya",   wickets: 3 },
+    { name: "Rudra Chaudhary",  wickets: 6 },
+    { name: "Devansh Bhaiya",   wickets: 4 },
     { name: "Pankaj Bhaiya",    wickets: 2 },
     { name: "Hardik Swami",     wickets: 1 },
     { name: "Atharv",           wickets: 0 }
