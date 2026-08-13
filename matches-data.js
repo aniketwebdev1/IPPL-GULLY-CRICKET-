@@ -32,6 +32,36 @@
 
 const MATCHES = [
   {
+    id: "m11",
+    date: "2026-08-12",
+    label: "Aniket Giant's vs Rudra Challengers",
+    ground: "Home Gully Ground",
+    // ⚡ Team totals (includes extras/wides etc., so they won't always
+    // exactly equal the sum of listed batters) — used for the Winner banner.
+    scores: {
+      "Aniket Giant's": 61,
+      "Rudra Challengers": 52
+    },
+    players: [
+      // name must match PLAYERS[].name in script.js exactly
+      // Note: 10 runs and 18 balls moved from Tejas's line to Chirag
+      // Bhaiya's per correction (Tejas: 4/5, Chirag Bhaiya: +10 runs/+18 balls).
+      { name: "Aniket Chaudhary", runs: 22, balls: 24, wickets: 1, overs: 2,   runsGiven: 14, catches: 0, runOuts: 1 },
+      { name: "Hardik Swami",     runs: 5,  balls: 6,  wickets: 0, overs: 2.5, runsGiven: 21, catches: 1, runOuts: 0 },
+      { name: "Devansh Bhaiya",   runs: 18, balls: 24, wickets: 2, overs: 3,   runsGiven: 14, catches: 0, runOuts: 0 },
+      { name: "Atharv",           runs: 1,  balls: 7,  wickets: 0, overs: 1,   runsGiven: 3,  catches: 0, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 0,  balls: 4,  wickets: 0, overs: 4,   runsGiven: 26, catches: 0, runOuts: 0 },
+      { name: "Tejas",            runs: 4,  balls: 5,  wickets: 1, overs: 3,   runsGiven: 15, catches: 0, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 29, balls: 31, wickets: 0, overs: 2,   runsGiven: 16, catches: 0, runOuts: 0 },
+      { name: "Pankaj Bhaiya",    runs: 8,  balls: 11, wickets: 0, overs: 1,   runsGiven: 4,  catches: 0, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 0,  balls: 0,  wickets: 0, overs: 0,   runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 0,  balls: 0,  wickets: 0, overs: 0,   runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "YUG",               runs: 0, balls: 0,  wickets: 0, overs: 0,   runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Sachin Bhaiya",    runs: 0,  balls: 0,  wickets: 0, overs: 0,   runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Kartik",           runs: 0,  balls: 0,  wickets: 0, overs: 0,   runsGiven: 0,  catches: 0, runOuts: 0 }
+    ]
+  },
+  {
     id: "m10",
     date: "2026-08-09",
     label: "Royal Challengers vs Kings",
@@ -294,30 +324,32 @@ const MATCHES = [
 const SEASON_TOTALS = {
   batters: [
     { name: "Rudra Chaudhary",  runs: 72 },
-    { name: "Aniket Chaudhary", runs: 99 },
-    { name: "Devansh Bhaiya",   runs: 39 },
+    { name: "Aniket Chaudhary", runs: 121 },
+    { name: "Devansh Bhaiya",   runs: 57 },
     { name: "YUG",              runs: 122 },
-    { name: "Pankaj Bhaiya",    runs: 232 },
+    { name: "Pankaj Bhaiya",    runs: 240 },
     { name: "Rajeev Kumar",     runs: 31 },
     { name: "Yogi Ashish",      runs: 59  },
-    { name: "Chirag Bhaiya",    runs: 146 },
-    { name: "Hardik Swami",     runs: 21  },
-    { name: "Atharv",           runs: 41 },
+    { name: "Chirag Bhaiya",    runs: 175 },
+    { name: "Hardik Swami",     runs: 26  },
+    { name: "Atharv",           runs: 42 },
     { name: "Sachin Bhaiya",    runs: 0 },
-    { name: "Kartik",           runs: 6 }
+    { name: "Kartik",           runs: 6 },
+    { name: "Tejas",            runs: 4 }
   ],
   bowlers: [
     { name: "Yogi Ashish",      wickets: 6 },
     { name: "Chirag Bhaiya",    wickets: 3 },
-    { name: "Aniket Chaudhary", wickets: 8 },
+    { name: "Aniket Chaudhary", wickets: 9 },
     { name: "YUG",              wickets: 9 },
     { name: "Rajeev Kumar",     wickets: 2 },
     { name: "Rudra Chaudhary",  wickets: 8 },
-    { name: "Devansh Bhaiya",   wickets: 5 },
+    { name: "Devansh Bhaiya",   wickets: 7 },
     { name: "Pankaj Bhaiya",    wickets: 4 },
     { name: "Hardik Swami",     wickets: 2 },
     { name: "Atharv",           wickets: 0 },
     { name: "Sachin Bhaiya",    wickets: 2 },
-    { name: "Kartik",           wickets: 0 }
+    { name: "Kartik",           wickets: 0 },
+    { name: "Tejas",            wickets: 1 }
   ]
 };
