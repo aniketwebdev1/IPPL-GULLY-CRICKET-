@@ -324,10 +324,10 @@ const MATCHES = [
 const SEASON_TOTALS = {
   batters: [
     { name: "Rudra Chaudhary",  runs: 72 },
-    { name: "Aniket Chaudhary", runs: 121 },
+    { name: "Aniket Chaudhary", runs: 135 },
     { name: "Devansh Bhaiya",   runs: 57 },
-    { name: "YUG",              runs: 122 },
-    { name: "Pankaj Bhaiya",    runs: 240 },
+    { name: "YUG",              runs: 141 },
+    { name: "Pankaj Bhaiya",    runs: 254 },
     { name: "Rajeev Kumar",     runs: 31 },
     { name: "Yogi Ashish",      runs: 59  },
     { name: "Chirag Bhaiya",    runs: 175 },
@@ -340,14 +340,14 @@ const SEASON_TOTALS = {
   bowlers: [
     { name: "Yogi Ashish",      wickets: 6 },
     { name: "Chirag Bhaiya",    wickets: 3 },
-    { name: "Aniket Chaudhary", wickets: 9 },
-    { name: "YUG",              wickets: 9 },
+    { name: "Aniket Chaudhary", wickets: 11 },
+    { name: "YUG",              wickets: 12 },
     { name: "Rajeev Kumar",     wickets: 2 },
-    { name: "Rudra Chaudhary",  wickets: 8 },
+    { name: "Rudra Chaudhary",  wickets: 10 },
     { name: "Devansh Bhaiya",   wickets: 7 },
     { name: "Pankaj Bhaiya",    wickets: 4 },
-    { name: "Hardik Swami",     wickets: 2 },
-    { name: "Atharv",           wickets: 0 },
+    { name: "Hardik Swami",     wickets: 5 },
+    { name: "Atharv",           wickets: 2 },
     { name: "Sachin Bhaiya",    wickets: 2 },
     { name: "Kartik",           wickets: 0 },
     { name: "Tejas",            wickets: 1 }
