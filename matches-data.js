@@ -324,7 +324,7 @@ const MATCHES = [
 const SEASON_TOTALS = {
   batters: [
     { name: "Rudra Chaudhary",  runs: 72 },
-    { name: "Aniket Chaudhary", runs: 135 },
+    { name: "Aniket Chaudhary", runs: 150 },
     { name: "Devansh Bhaiya",   runs: 57 },
     { name: "YUG",              runs: 141 },
     { name: "Pankaj Bhaiya",    runs: 254 },
