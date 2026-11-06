@@ -25,6 +25,8 @@
    history dekhi ja sakti hai aur Orange/Purple Cap sahi
    season data se calculate hote hain.
 
+   ⚠️ Har match ka "id" UNIQUE hona chahiye (m13, m14, ...).
+
    📁 records.html ("Past Records" page) bhi isi array se
    seedha date-wise list banata hai — koi extra kaam nahi,
    bas yahan match add karo aur woh wahan apne aap dikhega.
@@ -32,35 +34,29 @@
 
 const MATCHES = [
   {
-      id: "m12",
+    id: "m13",
     date: "2026-11-06",
     label: "Royal Challengers vs Kings",
     ground: "Home Gully Ground",
-      
-scores: {
+    scores: {
       "Royal Challengers": 33,
       "Kings": 48
     },
     players: [
-   { name: "Aniket Chaudhary", runs: 8, balls: 16, wickets: 1, overs: 3,    runsGiven: 17, catches: 0, runOuts: 0 },
-      { name: "Rajeev Kumar",     runs: 9,  balls: 8, wickets: 1, overs: 2,    runsGiven: 15,  catches: 0, runOuts: 0 },
-      { name: "Chirag Bhaiya",    runs: 0, balls: 0, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Hardik Swami",     runs: 0, balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Rudra Chaudhary",  runs: 27, balls: 27, wickets: 1, overs: 4,    runsGiven: 11, catches: 0, runOuts: 0 },
-      { name: "YUG",              runs: 5,  balls: 8,  wickets: 0, overs: 2,    runsGiven: 16, catches: 0, runOuts: 0 },
-      { name: "Pankaj Bhaiya",    runs: 7,  balls: 8,  wickets: 0, overs: 2,    runsGiven: 6, catches: 0, runOuts: 0 },
-      { name: "Devansh Bhaiya",   runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
-      { name: "Yogi Ashish",      runs: 0,  balls: 0,  wickets: 1, overs: 2,    runsGiven: 15,  catches: 0, runOuts: 0 }
+      // Gully Crix scorecard: "Rudra" = Rudra Chaudhary, "Rajeev Uncle" = Rajeev Kumar,
+      // "Ashish" = Yogi Ashish. Hardik retired out (0 off 0).
+      { name: "Aniket Chaudhary", runs: 8,  balls: 16, wickets: 1, overs: 3, runsGiven: 17, catches: 0, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 9,  balls: 8,  wickets: 1, overs: 2, runsGiven: 15, catches: 0, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 0,  balls: 0,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Hardik Swami",     runs: 0,  balls: 0,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 27, balls: 27, wickets: 1, overs: 4, runsGiven: 11, catches: 0, runOuts: 0 },
+      { name: "YUG",              runs: 5,  balls: 8,  wickets: 0, overs: 2, runsGiven: 16, catches: 0, runOuts: 0 },
+      { name: "Pankaj Bhaiya",    runs: 7,  balls: 8,  wickets: 0, overs: 2, runsGiven: 6,  catches: 0, runOuts: 0 },
+      { name: "Devansh Bhaiya",   runs: 0,  balls: 0,  wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 8,  balls: 24, wickets: 1, overs: 2, runsGiven: 16, catches: 0, runOuts: 0 }
     ]
   },
-   {
-
-
-
-
-
-
-     
+  {
     id: "m12",
     date: "2026-11-05",
     label: "Royal Challengers vs Kings",
@@ -345,18 +341,18 @@ scores: {
    zyada wickets) yahi data se automatically nikalte hain
    — jo naam sabse upar aa jaaye, wahi winner ban jaata hai.
 
-   Last updated: 5 Nov 2026 (m12 ke baad)
+   Last updated: 6 Nov 2026 (m13 ke baad)
    ============================================ */
 
 const SEASON_TOTALS = {
   batters: [
-    { name: "Rudra Chaudhary",  runs: 95 },
-    { name: "Aniket Chaudhary", runs: 142 },
+    { name: "Rudra Chaudhary",  runs: 122 },
+    { name: "Aniket Chaudhary", runs: 150 },
     { name: "Devansh Bhaiya",   runs: 57 },
-    { name: "YUG",              runs: 145 },
-    { name: "Pankaj Bhaiya",    runs: 254 },
-    { name: "Rajeev Kumar",     runs: 37 },
-    { name: "Yogi Ashish",      runs: 59 },
+    { name: "YUG",              runs: 150 },
+    { name: "Pankaj Bhaiya",    runs: 261 },
+    { name: "Rajeev Kumar",     runs: 46 },
+    { name: "Yogi Ashish",      runs: 67 },
     { name: "Chirag Bhaiya",    runs: 187 },
     { name: "Hardik Swami",     runs: 36 },
     { name: "Atharv",           runs: 42 },
@@ -365,12 +361,12 @@ const SEASON_TOTALS = {
     { name: "Tejas",            runs: 4 }
   ],
   bowlers: [
-    { name: "Yogi Ashish",      wickets: 6 },
+    { name: "Yogi Ashish",      wickets: 7 },
     { name: "Chirag Bhaiya",    wickets: 4 },
-    { name: "Aniket Chaudhary", wickets: 13 },
+    { name: "Aniket Chaudhary", wickets: 14 },
     { name: "YUG",              wickets: 12 },
-    { name: "Rajeev Kumar",     wickets: 2 },
-    { name: "Rudra Chaudhary",  wickets: 10 },
+    { name: "Rajeev Kumar",     wickets: 3 },
+    { name: "Rudra Chaudhary",  wickets: 11 },
     { name: "Devansh Bhaiya",   wickets: 8 },
     { name: "Pankaj Bhaiya",    wickets: 4 },
     { name: "Hardik Swami",     wickets: 6 },
