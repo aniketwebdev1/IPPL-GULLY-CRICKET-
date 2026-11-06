@@ -32,6 +32,35 @@
 
 const MATCHES = [
   {
+      id: "m12",
+    date: "2026-11-05",
+    label: "Royal Challengers vs Kings",
+    ground: "Home Gully Ground",
+      
+scores: {
+      "Royal Challengers": 33,
+      "Kings": 48
+    },
+    players: [
+   { name: "Aniket Chaudhary", runs: 8, balls: 16, wickets: 1, overs: 3,    runsGiven: 17, catches: 0, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 9,  balls: 8, wickets: 1, overs: 2,    runsGiven: 15,  catches: 0, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 0, balls: 0, wickets: 0, overs: 0, runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Hardik Swami",     runs: 0, balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 27, balls: 27, wickets: 1, overs: 4,    runsGiven: 11, catches: 0, runOuts: 0 },
+      { name: "YUG",              runs: 5,  balls: 8,  wickets: 0, overs: 2,    runsGiven: 16, catches: 0, runOuts: 0 },
+      { name: "Pankaj Bhaiya",    runs: 7,  balls: 8,  wickets: 0, overs: 2,    runsGiven: 6, catches: 0, runOuts: 0 },
+      { name: "Devansh Bhaiya",   runs: 0,  balls: 0,  wickets: 0, overs: 0,    runsGiven: 0,  catches: 0, runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 0,  balls: 0,  wickets: 1, overs: 2,    runsGiven: 15,  catches: 0, runOuts: 0 }
+    ]
+  },
+   {
+
+
+
+
+
+
+     
     id: "m12",
     date: "2026-11-05",
     label: "Royal Challengers vs Kings",
