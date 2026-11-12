@@ -19,6 +19,7 @@ const PLAYERS = [
   { number: "11", name: "Sachin Bhaiya", role: "Bowler" },
   { number: "12", name: "Kartik", role: "All-rounder" },
   { number: "13", name: "Tejas", role: "Bowler" },
+  { number: "14", name: "Ganja", role: "Batsman" },
 ];
 
 // ---------- 1b. TEAMS (edit this) ----------
