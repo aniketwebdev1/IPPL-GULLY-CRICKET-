@@ -34,6 +34,32 @@
 
 const MATCHES = [
   {
+    id: "m15",
+    date: "2026-11-12",
+    label: "Royal Challengers vs Kings",
+    ground: "Home Gully Ground",
+    scores: {
+      "Royal Challengers": 54,
+      "Kings": 56
+    },
+    players: [
+      // Gully Crix scorecard: "Sonu" = Chirag Bhaiya, "Rajeev Uncle" = Rajeev Kumar,
+      // "Rudra" = Rudra Chaudhary. Scorecard ka "Ashish" (Kings) = asli Hardik Swami,
+      // "Sachin" = Ganja (new player). Scorecard ka "Hardik" (RC) = Yogi Ashish (naam swap).
+      // Hardik Swami, Rajeev, Devansh, Yug, Ganja retired hurt. Yug ke 2 run outs (Chirag + Yogi Ashish).
+      { name: "Aniket Chaudhary", runs: 20, balls: 26, wickets: 0, overs: 3, runsGiven: 13, catches: 0, runOuts: 0 },
+      { name: "Rajeev Kumar",     runs: 7,  balls: 10, wickets: 1, overs: 1, runsGiven: 6,  catches: 0, runOuts: 0 },
+      { name: "Chirag Bhaiya",    runs: 14, balls: 20, wickets: 0, overs: 3, runsGiven: 22, catches: 0, runOuts: 0 },
+      { name: "Rudra Chaudhary",  runs: 10, balls: 13, wickets: 0, overs: 3, runsGiven: 15, catches: 0, runOuts: 0 },
+      { name: "YUG",              runs: 9,  balls: 13, wickets: 1, overs: 3, runsGiven: 15, catches: 0, runOuts: 2 },
+      { name: "Devansh Bhaiya",   runs: 7,  balls: 12, wickets: 0, overs: 1, runsGiven: 5,  catches: 0, runOuts: 0 },
+      { name: "Hardik Swami",     runs: 11, balls: 12, wickets: 1, overs: 2, runsGiven: 11, catches: 0, runOuts: 0 },
+      { name: "Yogi Ashish",      runs: 0,  balls: 1,  wickets: 0, overs: 1, runsGiven: 2,  catches: 0, runOuts: 0 },
+      { name: "Atharv",           runs: 0,  balls: 3,  wickets: 0, overs: 2, runsGiven: 13, catches: 0, runOuts: 0 },
+      { name: "Ganja",            runs: 6,  balls: 11, wickets: 0, overs: 1, runsGiven: 8,  catches: 0, runOuts: 0 }
+    ]
+  },
+  {
     id: "m14",
     date: "2026-11-10",
     label: "Royal Challengers vs Kings",
@@ -362,38 +388,40 @@ const MATCHES = [
    zyada wickets) yahi data se automatically nikalte hain
    — jo naam sabse upar aa jaaye, wahi winner ban jaata hai.
 
-   Last updated: 10 Nov 2026 (m14 ke baad)
+   Last updated: 12 Nov 2026 (m15 ke baad)
    ============================================ */
 
 const SEASON_TOTALS = {
   batters: [
-    { name: "Rudra Chaudhary",  runs: 141 },
-    { name: "Aniket Chaudhary", runs: 159 },
-    { name: "Devansh Bhaiya",   runs: 68 },
-    { name: "YUG",              runs: 164 },
+    { name: "Rudra Chaudhary",  runs: 151 },
+    { name: "Aniket Chaudhary", runs: 179 },
+    { name: "Devansh Bhaiya",   runs: 75 },
+    { name: "YUG",              runs: 173 },
     { name: "Pankaj Bhaiya",    runs: 261 },
-    { name: "Rajeev Kumar",     runs: 46 },
+    { name: "Rajeev Kumar",     runs: 53 },
     { name: "Yogi Ashish",      runs: 67 },
-    { name: "Chirag Bhaiya",    runs: 207 },
-    { name: "Hardik Swami",     runs: 36 },
+    { name: "Chirag Bhaiya",    runs: 221 },
+    { name: "Hardik Swami",     runs: 47 },
     { name: "Atharv",           runs: 42 },
     { name: "Sachin Bhaiya",    runs: 0 },
     { name: "Kartik",           runs: 6 },
-    { name: "Tejas",            runs: 4 }
+    { name: "Tejas",            runs: 4 },
+    { name: "Ganja",            runs: 6 }
   ],
   bowlers: [
     { name: "Yogi Ashish",      wickets: 7 },
     { name: "Chirag Bhaiya",    wickets: 4 },
     { name: "Aniket Chaudhary", wickets: 15 },
-    { name: "YUG",              wickets: 15 },
-    { name: "Rajeev Kumar",     wickets: 3 },
+    { name: "YUG",              wickets: 16 },
+    { name: "Rajeev Kumar",     wickets: 4 },
     { name: "Rudra Chaudhary",  wickets: 11 },
     { name: "Devansh Bhaiya",   wickets: 8 },
     { name: "Pankaj Bhaiya",    wickets: 4 },
-    { name: "Hardik Swami",     wickets: 6 },
+    { name: "Hardik Swami",     wickets: 7 },
     { name: "Atharv",           wickets: 2 },
     { name: "Sachin Bhaiya",    wickets: 2 },
     { name: "Kartik",           wickets: 0 },
-    { name: "Tejas",            wickets: 1 }
+    { name: "Tejas",            wickets: 1 },
+    { name: "Ganja",            wickets: 0 }
   ]
 };
